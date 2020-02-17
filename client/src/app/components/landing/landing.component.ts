@@ -3,6 +3,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitt
 import baseballTeams from '../../gameSeeds/baseball';
 import footballTeams from '../../gameSeeds/football';
 import presidents from '../../gameSeeds/presidents';
+import { HttpService } from 'src/app/http.service';
 
 @Component({
   selector: 'app-landing',
@@ -32,9 +33,10 @@ export class LandingComponent implements OnInit, OnDestroy {
   nflArray: string[] = [];
   nameChangeTimer: any;
 
-  constructor() { }
+  constructor(public http: HttpService) { }
 
   ngOnInit() {
+    this.testGetUsers();
     presidents.answers.forEach(president => this.presidentArray.push(president.display_value));
     baseballTeams.answers.forEach(team => this.mlbArray.push(team.display_value));
     footballTeams.answers.forEach(team => this.nflArray.push(team.display_value))
@@ -49,6 +51,17 @@ export class LandingComponent implements OnInit, OnDestroy {
     if (this.nameChangeTimer) {
       clearInterval(this.nameChangeTimer);
     }
+  }
+
+  testGetUsers() {
+    this.http.getAllUsers().subscribe(
+      (data: any) => {
+        console.log(data)
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
   }
 
   rollerRemoveAddClass(classname1, classname2) {
