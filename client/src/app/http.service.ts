@@ -10,4 +10,8 @@ export class HttpService {
   getAllUsers() {
     return this._http.get('/api/user/');
   }
+
+  getAllGames() {
+    return this._http.get('/api/game');
+  }
 }

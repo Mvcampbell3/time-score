@@ -10,7 +10,9 @@
 
     <div class="container pt-2">
       <div class="columns">
-        <div class="column">
+        <!-- Pre DB Add Buttons -->
+
+        <!-- <div class="column">
           <button class="button is-danger is-large is-fullwidth" (click)='selectGame("baseball")'>MLB Teams</button>
         </div>
         <div class="column">
@@ -19,6 +21,11 @@
         <div class="column">
           <button class="button is-info is-large is-fullwidth" (click)='selectGame("presidents")'>U.S.
             Presidents</button>
+        </div> -->
+
+        <!-- New DB Hotness -->
+        <div class="column" *ngFor='let game of gamesArray'>
+          <button class="button is-danger is-large is-fullwidth">{{game.name}}</button>
         </div>
       </div>
     </div>

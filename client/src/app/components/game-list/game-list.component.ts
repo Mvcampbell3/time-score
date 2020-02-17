@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { HttpService } from 'src/app/http.service';
+import { Game } from '../../models/game';
 
 @Component({
   selector: 'app-game-list',
@@ -7,7 +9,8 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 })
 export class GameListComponent implements OnInit, OnDestroy {
 
-  gamesArray: string[] = ['MLB Teams', 'NFL Teams', 'U.S. Presidents'];
+  // gamesArray: string[] = ['MLB Teams', 'NFL Teams', 'U.S. Presidents'];
+  gamesArray: Game[] = [];
   selected: boolean = false;
   selectedGame: string = '';
 
@@ -18,13 +21,26 @@ export class GameListComponent implements OnInit, OnDestroy {
   pos: number = 1;
   timerPlace: any;
 
-  constructor() { }
+  constructor(public http: HttpService) { }
 
   ngOnInit() {
+    this.getAllGames()
     setTimeout(() => {
       this.setBackgroundColor(0);
     }, 50)
     this.startTimer();
+  }
+
+  getAllGames() {
+    this.http.getAllGames().subscribe(
+      (data: Game[]) => {
+        console.log(data)
+        this.gamesArray = data;
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
   }
 
   startTimer() {
