@@ -1,7 +1,7 @@
 .list-bg {
   min-height: calc(100vh - 52px);
   background-color: #111;
-  transition: background-color 6s;
+  transition: background-color 5s;
 }
 
 .seeThrough {
@@ -27,8 +27,11 @@
 .games-container {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   @media screen and (max-width: 700px) {
     grid-template-columns: repeat(1, 1fr);
   }

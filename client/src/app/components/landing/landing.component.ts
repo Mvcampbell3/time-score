@@ -4,6 +4,7 @@ import baseballTeams from '../../gameSeeds/baseball';
 import footballTeams from '../../gameSeeds/football';
 import presidents from '../../gameSeeds/presidents';
 import { HttpService } from 'src/app/http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -33,7 +34,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   nflArray: string[] = [];
   nameChangeTimer: any;
 
-  constructor(public http: HttpService) { }
+  constructor(public http: HttpService, public router: Router) { }
 
   ngOnInit() {
     this.testGetUsers();
@@ -96,6 +97,6 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   toGamesList() {
     console.log('clicked')
-    this.landingClick.emit();
+    this.router.navigate(['/gameslist'])
   }
 }

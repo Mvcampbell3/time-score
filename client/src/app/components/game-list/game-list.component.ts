@@ -26,6 +26,8 @@ export class GameListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getAllGames()
+
+    // this is always causing every item to rerender :(
     setTimeout(() => {
       this.setBackgroundColor(0);
     }, 50)
@@ -81,10 +83,12 @@ export class GameListComponent implements OnInit, OnDestroy {
   }
 
   setClasses(i) {
+    const checkNum = i % 3;
     const classes = {
-      "one": (i + 1) % 2 === 0,
-      "three": (i + 1) % 2 !== 0,
-      "game-item": true
+      "game-item": true,
+      "three": checkNum === 2,
+      "two": checkNum === 1,
+      "one": checkNum === 0
     }
     return classes;
   }

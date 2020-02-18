@@ -13,25 +13,6 @@
         <div *ngFor='let game of gamesArray; let i = index' [ngClass]="setClasses(i)" (click)='selectGame(game._id)'>
           {{game.name}}</div>
       </div>
-      <div class="columns">
-        <!-- Pre DB Add Buttons -->
-
-        <!-- <div class="column">
-          <button class="button is-danger is-large is-fullwidth" (click)='selectGame("baseball")'>MLB Teams</button>
-        </div>
-        <div class="column">
-          <button class="button is-success is-large is-fullwidth" (click)='selectGame("football")'>NFL Teams</button>
-        </div>
-        <div class="column">
-          <button class="button is-info is-large is-fullwidth" (click)='selectGame("presidents")'>U.S.
-            Presidents</button>
-        </div> -->
-
-        <!-- New DB Hotness -->
-        <!-- <div class="column" *ngFor='let game of gamesArray'>
-          <button class="button is-success is-large is-fullwidth" (click)='selectGame(game._id)'>{{game.name}}</button>
-        </div> -->
-      </div>
     </div>
   </div>
 
