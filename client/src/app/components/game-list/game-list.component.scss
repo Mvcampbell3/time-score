@@ -23,3 +23,34 @@
 .newBG3 {
   background-color: rgb(41, 0, 0);
 }
+
+.games-container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.game-item {
+  width: 100%;
+  background-color: white;
+  display: grid;
+  place-items: center center;
+  border-radius: 5px;
+  padding: 12px 0;
+  font-size: 24px;
+  color: white;
+}
+
+.game-item.one {
+  background-color: #3273dc;
+}
+.game-item.two {
+  background-color: #f14668;
+}
+.game-item.three {
+  background-color: #48c774;
+}

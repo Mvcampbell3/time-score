@@ -79,4 +79,13 @@ export class GameListComponent implements OnInit, OnDestroy {
     this.selectedGameId = ''
     this.startTimer()
   }
+
+  setClasses(i) {
+    const classes = {
+      "one": (i + 1) % 2 === 0,
+      "three": (i + 1) % 2 !== 0,
+      "game-item": true
+    }
+    return classes;
+  }
 }
