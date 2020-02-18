@@ -12,9 +12,9 @@ module.exports = {
   },
 
   newGame(req, res) {
-    const { name, description, instructions, creatorId, answers } = req.body;
+    const { name, description, instructions, creatorId, answers, inputPlaceholder } = req.body;
     const newGame = new db.Game({
-      name, description, instructions, creatorId, answers
+      name, description, instructions, creatorId, answers, inputPlaceholder
     })
     newGame.save()
       .then(result => res.json(result))

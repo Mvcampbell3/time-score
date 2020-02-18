@@ -19,6 +19,11 @@ const GameSchema = new Schema({
     required: true
   },
 
+  inputPlaceholder: {
+    type: String,
+    default: 'Type Answer Here...'
+  },
+
   description: {
     type: String,
     required: true

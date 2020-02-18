@@ -4,6 +4,7 @@ module.exports = function() {
   const newGame = new db.Game({
     name: 'MLB Teams',
     description: 'Name all Major League Baseball Teams',
+    inputPlaceholder: 'Enter MLB Team Here...',
     instructions: 'Only team name will count towards correct answers, city names will not',
     creatorId: '5e4467962d3d3180bc9cacd3',
     answers: [

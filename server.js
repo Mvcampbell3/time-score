@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 const baseballSeed = require('./seeds/baseballDB_seed');
 let seedBaseball = false;
+const presidentSeed = require('./seeds/presidents_seed');
+let seedPresident = false;
+
 
 require('dotenv').config();
 
@@ -23,6 +26,9 @@ mongoose
     console.log('mongoose connected');
     if (seedBaseball) {
       baseballSeed();
+    }
+    if (seedPresident) {
+      presidentSeed()
     }
     app.listen(PORT, () => {
       console.log(`server is live on http://localhost:${PORT}`);
