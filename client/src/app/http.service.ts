@@ -14,4 +14,8 @@ export class HttpService {
   getAllGames() {
     return this._http.get('/api/game');
   }
+
+  getOneGame(id) {
+    return this._http.get(`/api/game/id/${id}`)
+  }
 }

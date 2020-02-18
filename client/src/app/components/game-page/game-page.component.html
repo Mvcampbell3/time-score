@@ -1,4 +1,4 @@
-<div class="game-page-bg">
+<div class="game-page-bg" *ngIf='loadedDB'>
 
   <div class="modal" #endGameModal>
     <div class="modal-background"></div>
@@ -8,7 +8,6 @@
         <button class="delete" aria-label="close" (click)='closeModal(false)'></button>
       </header>
       <section class="modal-card-body">
-        <!-- Content ... -->
         <div class="level">
           <div class="level-item">
             <p class='subtitle'>You got {{scoreGame}} right</p>

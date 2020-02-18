@@ -13,6 +13,7 @@ export class GameListComponent implements OnInit, OnDestroy {
   gamesArray: Game[] = [];
   selected: boolean = false;
   selectedGame: string = '';
+  selectedGameId: string = '';
 
   @ViewChild('listbg', { static: false }) listbg: ElementRef;
 
@@ -43,6 +44,7 @@ export class GameListComponent implements OnInit, OnDestroy {
     )
   }
 
+  // For bg change
   startTimer() {
     this.timerPlace = setInterval(() => {
       if (this.pos < this.bgClasses.length) {
@@ -60,8 +62,8 @@ export class GameListComponent implements OnInit, OnDestroy {
     this.timerPlace = null;
   }
 
-  selectGame(gameName) {
-    this.selectedGame = gameName;
+  selectGame(id) {
+    this.selectedGameId = id;
     clearInterval(this.timerPlace);
     this.selected = true;
   }
@@ -74,6 +76,7 @@ export class GameListComponent implements OnInit, OnDestroy {
   returnFromGame() {
     this.selectedGame = '';
     this.selected = false;
+    this.selectedGameId = ''
     this.startTimer()
   }
 }

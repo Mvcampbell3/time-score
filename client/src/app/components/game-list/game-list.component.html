@@ -25,7 +25,7 @@
 
         <!-- New DB Hotness -->
         <div class="column" *ngFor='let game of gamesArray'>
-          <button class="button is-danger is-large is-fullwidth">{{game.name}}</button>
+          <button class="button is-danger is-large is-fullwidth" (click)='selectGame(game._id)'>{{game.name}}</button>
         </div>
       </div>
     </div>
@@ -34,5 +34,5 @@
 </div>
 
 <ng-template #gameArea>
-  <app-game-page [gameTitle]='selectedGame' (back)='returnFromGame()'></app-game-page>
+  <app-game-page [gameTitle]='selectedGame' [gameId]='selectedGameId' (back)='returnFromGame()'></app-game-page>
 </ng-template>
