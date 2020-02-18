@@ -30,7 +30,7 @@ module.exports = function() {
       { display_value: 'Atlanta Braves', accepted_values: ['braves'] },
       { display_value: 'Miami Marlins', accepted_values: ['marlins', 'fish'] },
       { display_value: 'New York Mets', accepted_values: ['mets', 'metropolitans'] },
-      { display_value: 'Philadelphia Philles', accepted_values: ['philles'] },
+      { display_value: 'Philadelphia Phillies', accepted_values: ['phillies'] },
       { display_value: 'Washington Nationals', accepted_values: ['nationals', 'nats'] },
       // NL Central
       { display_value: 'Chicago Cubs', accepted_values: ['cubs'] },
