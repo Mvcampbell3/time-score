@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from 'src/app/http.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   login: boolean = false;
 
-  constructor() { }
+  constructor(public http: HttpService) { }
 
   ngOnInit() {
   }
@@ -47,6 +48,16 @@ export class LoginComponent implements OnInit {
     }
     if (this.emailValid && this.passwordLength && this.passwordNumber && this.passwordCapital) {
       console.log('would send login request')
+      this.http.loginUser(sendObj).subscribe(
+        (data: { token: string }) => {
+          console.log(data.token);
+          // set token to local storage for retrieval in http service
+          localStorage.setItem('time-score-token', data.token)
+        },
+        (err: any) => {
+          console.log(err)
+        }
+      )
     } else {
       console.log('login not valid, would not send request')
     }

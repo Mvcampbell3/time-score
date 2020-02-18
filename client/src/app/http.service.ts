@@ -18,4 +18,8 @@ export class HttpService {
   getOneGame(id) {
     return this._http.get(`/api/game/id/${id}`)
   }
+
+  loginUser(sendObj) {
+    return this._http.post('/api/user/login', sendObj)
+  }
 }

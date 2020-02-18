@@ -44,6 +44,7 @@ module.exports = {
   },
 
   loginUser: (req, res) => {
+    console.log(req.body)
     const { email, password } = req.body;
     db.User.findOne({ email })
       .then(async dbUser => {
