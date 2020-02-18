@@ -10,40 +10,54 @@
       <div class="field" *ngIf='!login'>
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" type="text" placeholder="Username..." ([ngModel])='username'>
+          <input class="input" type="text" placeholder="Username..." [(ngModel)]='username'
+            (input)='usernameValidate()'>
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
           </span>
+          <p [ngClass]='usernameValid ? "help is-success":"help is-danger"'>Username must be at
+            least 6 characters long</p>
         </div>
       </div>
 
       <div class='field'>
         <label for="email" class="label">Email</label>
         <div class="control has-icons-left">
-          <input type="text" class="input" placeholder="Email..." ([ngModel])='email'>
+          <input type="text" class="input" placeholder="Email..." [(ngModel)]='email' (input)='emailValidate()'>
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
+          <p [ngClass]='emailValid ? "help is-success":"help is-danger"'>Must be a valid email
+            address</p>
         </div>
       </div>
 
       <div class="field">
         <label for="password1" class="label">Password</label>
         <div class="control has-icons-left">
-          <input type="password" class='input' placeholder='Password' ([ngModel])='password1'>
+          <input type="password" class='input' placeholder='Password' [(ngModel)]='password1'
+            (input)='password1Validate()'>
           <span class="icon is-small is-left">
             <i class="fas fa-key"></i>
           </span>
+          <p [ngClass]='passwordLength ? "help is-success":"help is-danger"'>Password must be at least 6 characters long
+          </p>
+          <p [ngClass]='passwordNumber ? "help is-success":"help is-danger"'>Password must contain at least one number
+          </p>
+          <p [ngClass]='passwordCapital ? "help is-success":"help is-danger"'>Password must contain at least one capital
+            letter</p>
         </div>
       </div>
 
       <div class="field" *ngIf='!login'>
         <label for="password2" class="label">Confirm Password</label>
         <div class="control has-icons-left">
-          <input type="password" class='input' placeholder='Confirm Password' ([ngModel])='password2'>
+          <input type="password" class='input' placeholder='Confirm Password' [(ngModel)]='password2'
+            (input)='password2Validate()'>
           <span class="icon is-small is-left">
             <i class="fas fa-key"></i>
           </span>
+          <p [ngClass]='passwordMatch ? "help is-success":"help is-danger"'>Passwords must match</p>
         </div>
       </div>
       <div class="level">
