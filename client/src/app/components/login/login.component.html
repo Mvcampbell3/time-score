@@ -1,0 +1,61 @@
+<div [ngClass]='login ? "hero is-info is-small" : "hero is-success is-small"'>
+  <div class='hero-body has-text-centered'>
+    <h1 class="title">{{login ? "Login":"Signup"}}</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="columns pt-2">
+    <div class="column is-half is-offset-one-quarter">
+
+      <div class="field" *ngIf='!login'>
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="Username..." ([ngModel])='username'>
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class='field'>
+        <label for="email" class="label">Email</label>
+        <div class="control has-icons-left">
+          <input type="text" class="input" placeholder="Email..." ([ngModel])='email'>
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="password1" class="label">Password</label>
+        <div class="control has-icons-left">
+          <input type="password" class='input' placeholder='Password' ([ngModel])='password1'>
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field" *ngIf='!login'>
+        <label for="password2" class="label">Confirm Password</label>
+        <div class="control has-icons-left">
+          <input type="password" class='input' placeholder='Confirm Password' ([ngModel])='password2'>
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+        </div>
+      </div>
+      <div class="level">
+        <div class="level-left">
+          <button class="button level-item is-link"
+            (click)='switchForms()'>{{login ? "Need to Sign Up?": "Already Signed Up?"}}</button>
+        </div>
+        <div class="level-right">
+          <button class="button level-item is-success" (click)='submitForm()'>Submit</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
