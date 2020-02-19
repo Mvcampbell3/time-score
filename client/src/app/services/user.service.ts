@@ -12,12 +12,12 @@ export class UserService {
 
   constructor() { }
 
-  setUser(successLogin: boolean, userInfo: User) {
+  setUser(successLogin: boolean, userInfo: User): void {
     this.user.next(successLogin);
     this.userInfo = userInfo;
   }
 
-  logOutUser() {
+  logOutUser(): void {
     this.user.next(false);
     this.userInfo = null;
   }

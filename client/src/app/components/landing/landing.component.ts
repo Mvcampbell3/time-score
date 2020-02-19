@@ -5,6 +5,8 @@ import footballTeams from '../../gameSeeds/football';
 import presidents from '../../gameSeeds/presidents';
 import { HttpService } from 'src/app/services/http.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import User from 'src/app/models/user';
 
 @Component({
   selector: 'app-landing',
@@ -34,9 +36,16 @@ export class LandingComponent implements OnInit, OnDestroy {
   nflArray: string[] = [];
   nameChangeTimer: any;
 
-  constructor(public http: HttpService, public router: Router) { }
+  userLogged: boolean;
+
+  constructor(public http: HttpService, public router: Router, public userService: UserService) { }
 
   ngOnInit() {
+    this.userService.user.subscribe(
+      (data: boolean) => {
+        console.log(data)
+      }
+    )
     this.checkAuth();
     this.loadLists();
     this.startNameChangeTimer();
@@ -58,14 +67,24 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   checkAuth() {
-    this.http.checkToken().subscribe(
-      (data: any) => {
-        console.log(data)
-      },
-      (err: any) => {
-        console.log(err)
+    this.userService.user.subscribe(
+      (data: boolean) => {
+        if (!data) {
+          this.http.checkToken().subscribe(
+            (data: { savedTokenValid: boolean, userInfo: User }) => {
+              console.log(data)
+              this.userService.setUser(true, data.userInfo);
+            },
+            (err: any) => {
+              console.log(err)
+            }
+          )
+        } else {
+          console.log('user was already logged in')
+        }
       }
     )
+
   }
 
 
