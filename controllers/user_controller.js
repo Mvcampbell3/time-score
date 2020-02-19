@@ -74,7 +74,7 @@ module.exports = {
 
   checkToken: (req, res) => {
     if (req.user) {
-      res.json(({ savedTokenValid: true }))
+      res.json(({ savedTokenValid: true, userInfo: { email: req.user.email, id: req.user.id, username: req.user.username } }))
     } else {
       res.json({ savedTokenValid: false })
     }
