@@ -1,32 +1,3 @@
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" routerLink='/'>Home</a>
-
-    <a (click)="toggleNavbar()" role="button" #navBurger class="navbar-burger burger" aria-label="menu"
-      aria-expanded="false" data-target="main-nav">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-
-  <div id="main-nav" class="navbar-menu" #navMenu>
-    <div class="navbar-start">
-      <a routerLink='gameslist' (click)='shutNavMobile()' class="navbar-item">List of Games</a>
-      <a routerLink='instructions' (click)='shutNavMobile()' class="navbar-item">How to Play</a>
-      <a routerLink='login' (click)='shutNavMobile()' class="navbar-item">Login</a>
-    </div>
-  </div>
-</nav>
-
-<div *ngIf='showLanding'>
-  <app-landing (landingClick)='gameListView()'></app-landing>
-</div>
-<div *ngIf='showGameList'>
-  <app-game-list></app-game-list>
-</div>
-<div *ngIf='showInstructions'>
-  <app-instructions (sendToPage)='handlePageSend($event)'></app-instructions>
-</div>
+<app-header></app-header>
 
 <router-outlet></router-outlet>

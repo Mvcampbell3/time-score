@@ -41,12 +41,6 @@ export class LandingComponent implements OnInit, OnDestroy {
   constructor(public http: HttpService, public router: Router, public userService: UserService) { }
 
   ngOnInit() {
-    this.userService.user.subscribe(
-      (data: boolean) => {
-        console.log(data)
-      }
-    )
-    this.checkAuth();
     this.loadLists();
     this.startNameChangeTimer();
     setTimeout(() => {
@@ -65,27 +59,6 @@ export class LandingComponent implements OnInit, OnDestroy {
     baseballTeams.answers.forEach(team => this.mlbArray.push(team.display_value));
     footballTeams.answers.forEach(team => this.nflArray.push(team.display_value))
   }
-
-  checkAuth() {
-    // Might have to set this to user bool, not bs so it wont re run everytime user changes
-    // checking with user info works, move to app.component?
-    console.log(this.userService.userInfo)
-    if (this.userService.userInfo === null) {
-      console.log('running token check')
-      this.http.checkToken().subscribe(
-        (data: { savedTokenValid: boolean, userInfo: User }) => {
-          console.log(data)
-          this.userService.setUser(true, data.userInfo);
-        },
-        (err: any) => {
-          console.log(err)
-        }
-      )
-    } else {
-      console.log('user was already logged in')
-    }
-  }
-
 
   rollerRemoveAddClass(classname1, classname2) {
     this.roller1.nativeElement.classList.remove(`${classname1}-1`)
