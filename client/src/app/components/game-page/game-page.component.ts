@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Game } from '../../models/game';
 import { Answer } from '../../models/answer';
-import { HttpService } from 'src/app/http.service';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-game-page',

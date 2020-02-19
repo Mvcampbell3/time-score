@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Output, EventEmitt
 import baseballTeams from '../../gameSeeds/baseball';
 import footballTeams from '../../gameSeeds/football';
 import presidents from '../../gameSeeds/presidents';
-import { HttpService } from 'src/app/http.service';
+import { HttpService } from 'src/app/services/http.service';
 import { Router } from '@angular/router';
 
 @Component({

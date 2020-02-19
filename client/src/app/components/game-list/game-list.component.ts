@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { HttpService } from 'src/app/http.service';
+import { HttpService } from 'src/app/services/http.service';
 import { Game } from '../../models/game';
 
 @Component({
