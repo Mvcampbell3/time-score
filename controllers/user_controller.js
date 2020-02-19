@@ -70,5 +70,9 @@ module.exports = {
       })
       // res send for db fail
       .catch(err => res.status(500).json({ error: 'Error while accessing database' }))
+  },
+
+  checkToken: (req, res) => {
+    res.json(({ ok: true }))
   }
 };

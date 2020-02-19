@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
   constructor(public _http: HttpClient) { }
+
+  setAuthorization(): object {
+    const token = JSON.parse(localStorage.getItem('time-score-token'));
+    let headers;
+    if (token) {
+      headers = new HttpHeaders().set('Authoization', `Bearer ${token}`);
+    } else {
+      headers = new HttpHeaders().set('Authorization', `Beader empty`)
+    }
+    return { headers }
+  }
 
   getAllUsers() {
     return this._http.get('/api/user/');
@@ -21,5 +32,9 @@ export class HttpService {
 
   loginUser(sendObj) {
     return this._http.post('/api/user/login', sendObj)
+  }
+
+  checkToken() {
+    return this._http.get('/api/user/checkAuth', this.setAuthorization())
   }
 }
