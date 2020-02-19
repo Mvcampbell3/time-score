@@ -26,7 +26,7 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   rollerContent1: string = 'Theodore Roosevelt';
   rollerContent2: string = 'Tampa Bay Rays';
-  rollerContent3: string = 'Atlant Braves';
+  rollerContent3: string = 'Atlanta Braves';
   rollerContent4: string = 'Tampa Bay Buccaneers';
   rollerContent5: string = 'Kansas City Chiefs';
   rollerContent6: string = 'Thomas Jefferson';
