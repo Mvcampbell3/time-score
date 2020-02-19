@@ -8,7 +8,8 @@ import { BehaviorSubject } from 'rxjs';
 export class UserService {
 
   user = new BehaviorSubject<boolean>(false);
-  userInfo: User;
+  userInfo: User = null;
+  userLogged: boolean;
 
   constructor() { }
 

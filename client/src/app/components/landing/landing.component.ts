@@ -67,24 +67,23 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   checkAuth() {
-    this.userService.user.subscribe(
-      (data: boolean) => {
-        if (!data) {
-          this.http.checkToken().subscribe(
-            (data: { savedTokenValid: boolean, userInfo: User }) => {
-              console.log(data)
-              this.userService.setUser(true, data.userInfo);
-            },
-            (err: any) => {
-              console.log(err)
-            }
-          )
-        } else {
-          console.log('user was already logged in')
+    // Might have to set this to user bool, not bs so it wont re run everytime user changes
+    // checking with user info works, move to app.component?
+    console.log(this.userService.userInfo)
+    if (this.userService.userInfo === null) {
+      console.log('running token check')
+      this.http.checkToken().subscribe(
+        (data: { savedTokenValid: boolean, userInfo: User }) => {
+          console.log(data)
+          this.userService.setUser(true, data.userInfo);
+        },
+        (err: any) => {
+          console.log(err)
         }
-      }
-    )
-
+      )
+    } else {
+      console.log('user was already logged in')
+    }
   }
 
 
