@@ -11,7 +11,7 @@ export class HttpService {
     const token = JSON.parse(localStorage.getItem('time-score-token'));
     let headers;
     if (token) {
-      headers = new HttpHeaders().set('Authoization', `Bearer ${token}`);
+      headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     } else {
       headers = new HttpHeaders().set('Authorization', `Beader empty`)
     }

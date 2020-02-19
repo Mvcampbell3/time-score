@@ -73,6 +73,10 @@ module.exports = {
   },
 
   checkToken: (req, res) => {
-    res.json(({ ok: true }))
+    if (req.user) {
+      res.json(({ savedTokenValid: true }))
+    } else {
+      res.json({ savedTokenValid: false })
+    }
   }
 };

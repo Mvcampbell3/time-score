@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
         (data: { token: string }) => {
           console.log(data.token);
           // set token to local storage for retrieval in http service
-          localStorage.setItem('time-score-token', data.token)
+          localStorage.setItem('time-score-token', JSON.stringify(data.token))
         },
         (err: any) => {
           console.log(err)

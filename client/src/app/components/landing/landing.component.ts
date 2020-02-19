@@ -37,12 +37,9 @@ export class LandingComponent implements OnInit, OnDestroy {
   constructor(public http: HttpService, public router: Router) { }
 
   ngOnInit() {
-    this.testGetUsers();
-    presidents.answers.forEach(president => this.presidentArray.push(president.display_value));
-    baseballTeams.answers.forEach(team => this.mlbArray.push(team.display_value));
-    footballTeams.answers.forEach(team => this.nflArray.push(team.display_value))
-
-    this.startNameChangeTimer()
+    this.checkAuth();
+    this.loadLists();
+    this.startNameChangeTimer();
     setTimeout(() => {
       this.rollerRemoveAddClass('a', 'b')
     }, 800)
@@ -54,8 +51,14 @@ export class LandingComponent implements OnInit, OnDestroy {
     }
   }
 
-  testGetUsers() {
-    this.http.getAllUsers().subscribe(
+  loadLists() {
+    presidents.answers.forEach(president => this.presidentArray.push(president.display_value));
+    baseballTeams.answers.forEach(team => this.mlbArray.push(team.display_value));
+    footballTeams.answers.forEach(team => this.nflArray.push(team.display_value))
+  }
+
+  checkAuth() {
+    this.http.checkToken().subscribe(
       (data: any) => {
         console.log(data)
       },
@@ -64,6 +67,7 @@ export class LandingComponent implements OnInit, OnDestroy {
       }
     )
   }
+
 
   rollerRemoveAddClass(classname1, classname2) {
     this.roller1.nativeElement.classList.remove(`${classname1}-1`)
