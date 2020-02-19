@@ -1,6 +1,6 @@
 <div [ngClass]='login ? "hero is-info is-small" : "hero is-success is-small"'>
   <div class='hero-body has-text-centered'>
-    <h1 class="title">{{login ? "Login":"Signup"}}</h1>
+    <h1 class="title">{{login ? "Login":"Sign Up"}}</h1>
   </div>
 </div>
 <div class="container">
@@ -62,11 +62,12 @@
       </div>
       <div class="level">
         <div class="level-left">
-          <button class="button level-item is-link"
-            (click)='switchForms()'>{{login ? "Need to Sign Up?": "Already Signed Up?"}}</button>
+          <button class="button level-item is-success" (click)='submitForm()'>Submit</button>
         </div>
         <div class="level-right">
-          <button class="button level-item is-success" (click)='submitForm()'>Submit</button>
+          <button class="button level-item is-link is-inverted" (click)='switchForms()'>
+            {{login ? "Need to Sign Up?": "Already Signed Up?"}}
+          </button>
         </div>
       </div>
 
