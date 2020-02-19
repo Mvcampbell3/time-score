@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   passwordMatch: boolean = false;
 
-  login: boolean = false;
+  login: boolean = true;
 
   constructor(public http: HttpService) { }
 
