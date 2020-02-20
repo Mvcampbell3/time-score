@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { Game } from '../../models/game';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-list',
@@ -9,11 +10,18 @@ import { Game } from '../../models/game';
 })
 export class GameListComponent implements OnInit, OnDestroy {
 
-  // gamesArray: string[] = ['MLB Teams', 'NFL Teams', 'U.S. Presidents'];
   gamesArray: Game[] = [];
   selected: boolean = false;
   selectedGame: string = '';
   selectedGameId: string = '';
+
+  loading: boolean;
+
+  loadingSub: Subscription = this.http.loading.subscribe(
+    (data: boolean) => {
+      this.loading = data;
+    }
+  );
 
   @ViewChild('listbg', { static: false }) listbg: ElementRef;
 
@@ -25,8 +33,9 @@ export class GameListComponent implements OnInit, OnDestroy {
   constructor(public http: HttpService) { }
 
   ngOnInit() {
+    // this.loadingSub.unsubscribe()
     this.getAllGames()
-
+    this.http.loading.next(true);
     // this is always causing every item to rerender :(
     setTimeout(() => {
       this.setBackgroundColor(0);
@@ -39,6 +48,7 @@ export class GameListComponent implements OnInit, OnDestroy {
       (data: Game[]) => {
         console.log(data)
         this.gamesArray = data;
+        this.http.loading.next(false);
       },
       (err: any) => {
         console.log(err)

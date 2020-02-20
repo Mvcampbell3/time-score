@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
+
+  loading = new BehaviorSubject<boolean>(false);
 
   constructor(public _http: HttpClient) { }
 
@@ -16,6 +20,14 @@ export class HttpService {
       headers = new HttpHeaders().set('Authorization', `Beader empty`)
     }
     return { headers }
+  }
+
+  setLoadingNextTrue() {
+    this.loading.next(true);
+  }
+
+  setLoadingNextFalse() {
+    this.loading.next(false);
   }
 
   getAllUsers() {
