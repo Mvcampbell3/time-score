@@ -1,4 +1,5 @@
 <div [ngClass]='login ? "hero is-info is-small" : "hero is-success is-small"'>
+  <app-loader *ngIf='loading'></app-loader>
   <div class='hero-body has-text-centered'>
     <h1 class="title">{{login ? "Login":"Sign Up"}}</h1>
   </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
+import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,17 @@ export class LoginComponent implements OnInit {
 
   login: boolean = true;
 
-  constructor(public http: HttpService) { }
+  loading: boolean;
+  loadingSub: Subscription = this.http.loading.subscribe(
+    (data: boolean) => {
+      this.loading = data;
+    },
+    (err: any) => {
+      console.log(err)
+    }
+  )
+
+  constructor(public http: HttpService, public userServive: UserService) { }
 
   ngOnInit() {
   }
@@ -97,9 +109,13 @@ export class LoginComponent implements OnInit {
       this.http.createUser(sendObj).subscribe(
         (data: any) => {
           console.log(data)
+          this.http.loading.next(false)
+          this.login = true;
+          // Display create success modal which tells user that were created, need to login
         },
         (err: any) => {
           console.log(err)
+          this.http.loading.next(false)
         }
       )
     } else {
