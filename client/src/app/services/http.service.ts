@@ -35,6 +35,7 @@ export class HttpService {
   }
 
   getAllGames() {
+    this.loading.next(true);
     return this._http.get('/api/game');
   }
 

@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
 })
 export class GameListComponent implements OnInit, OnDestroy {
 
+  @ViewChild('listbg', { static: false }) listbg: ElementRef;
+
   gamesArray: Game[] = [];
   selected: boolean = false;
   selectedGame: string = '';
@@ -23,9 +25,6 @@ export class GameListComponent implements OnInit, OnDestroy {
     }
   );
 
-  @ViewChild('listbg', { static: false }) listbg: ElementRef;
-
-
   bgClasses: string[] = ['newBG1', 'newBG2', 'newBG3'];
   pos: number = 1;
   timerPlace: any;
@@ -33,14 +32,16 @@ export class GameListComponent implements OnInit, OnDestroy {
   constructor(public http: HttpService) { }
 
   ngOnInit() {
-    // this.loadingSub.unsubscribe()
     this.getAllGames()
-    this.http.loading.next(true);
-    // this is always causing every item to rerender :(
     setTimeout(() => {
       this.setBackgroundColor(0);
     }, 50)
     this.startTimer();
+  }
+
+  ngOnDestroy() {
+    this.timerPlace = null;
+    this.loadingSub.unsubscribe();
   }
 
   getAllGames() {
@@ -68,10 +69,6 @@ export class GameListComponent implements OnInit, OnDestroy {
         this.pos++;
       }
     }, 6000)
-  }
-
-  ngOnDestroy() {
-    this.timerPlace = null;
   }
 
   selectGame(id) {
