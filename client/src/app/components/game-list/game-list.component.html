@@ -1,4 +1,5 @@
 <div *ngIf='!selected else gameArea'>
+  <app-loader *ngIf='loading'></app-loader>
   <div #listbg class="list-bg">
 
     <div class="hero is-small is-transparent seeThrough">
