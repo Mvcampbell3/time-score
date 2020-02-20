@@ -78,6 +78,14 @@ export class LoginComponent implements OnInit {
       this.usernameValid
     ) {
       console.log('would send sign up request')
+      this.http.createUser(sendObj).subscribe(
+        (data: any) => {
+          console.log(data)
+        },
+        (err: any) => {
+          console.log(err)
+        }
+      )
     } else {
       console.log('sign up not valid, would not send request')
     }

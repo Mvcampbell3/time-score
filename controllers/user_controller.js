@@ -24,23 +24,29 @@ module.exports = {
   },
 
   createUser: async (req, res) => {
-    // add checks for already existing email and username
     const { username, email, password } = req.body;
-    const hash = await bcrypt.hash(password, parseInt(process.env.SALT_ROUNDS))
+    const sameUsername = await db.User.find({ username });
+    const sameEmail = await db.User.find({ email });
 
-    const newUser = new db.User({
-      username,
-      email,
-      password: hash
-    })
+    if (sameUsername.length > 0 || sameEmail.length > 0) {
+      res.json({ username: sameUsername.length, email: sameEmail.length });
+    } else {
+      const hash = await bcrypt.hash(password, parseInt(process.env.SALT_ROUNDS))
 
-    newUser.save()
-      .then(user => {
-        res.json(user)
+      const newUser = new db.User({
+        username,
+        email,
+        password: hash
       })
-      .catch(err => {
-        res.json(err)
-      })
+
+      newUser.save()
+        .then(user => {
+          res.json(user)
+        })
+        .catch(err => {
+          res.json(err)
+        })
+    }
   },
 
   loginUser: (req, res) => {

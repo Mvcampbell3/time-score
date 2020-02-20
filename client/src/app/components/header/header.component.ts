@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.http.checkToken().subscribe(
         (data: { savedTokenValid: boolean, userInfo: User }) => {
           console.log(data)
-          this.userService.setUser(true, data.userInfo);
+          this.userService.setUser(data.savedTokenValid, data.userInfo);
         },
         (err: any) => {
           console.log(err)

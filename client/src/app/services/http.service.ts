@@ -38,7 +38,12 @@ export class HttpService {
 
   loginUser(sendObj) {
     this.loading.next(true);
-    return this._http.post('/api/user/login', sendObj)
+    return this._http.post('/api/user/login', sendObj);
+  }
+
+  createUser(sendObj) {
+    this.loading.next(true);
+    return this._http.post('/api/user', sendObj);
   }
 
   checkToken() {
