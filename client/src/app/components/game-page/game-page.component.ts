@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, 
 import { Game } from '../../models/game';
 import { Answer } from '../../models/answer';
 import { HttpService } from 'src/app/services/http.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game-page',
@@ -24,7 +25,14 @@ export class GamePageComponent implements OnInit, OnDestroy {
   play: boolean = true;
   firstLoad: boolean = true;
   ongoing: boolean = false;
-  loadedDB: boolean = false;
+  loading: boolean;
+
+  loadingSub: Subscription = this.http.loading.subscribe(
+    (data: boolean) => {
+      this.loading = data;
+    }
+  );
+
 
   constructor(public http: HttpService) { }
 
@@ -39,8 +47,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
         this.game = data;
         this.game.answers = this.game.answers.map(answer => new Answer(answer.display_value, answer.accepted_values))
         console.log(this.game.answers)
-        this.loadedDB = true;
-
+        this.http.loading.next(false);
       },
       (err: any) => {
         console.log(err)
@@ -49,6 +56,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.loadingSub.unsubscribe();
     if (this.gameTitle !== '') {
       this.clearGameAnswers()
     }

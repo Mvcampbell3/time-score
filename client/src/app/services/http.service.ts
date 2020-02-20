@@ -22,14 +22,6 @@ export class HttpService {
     return { headers }
   }
 
-  setLoadingNextTrue() {
-    this.loading.next(true);
-  }
-
-  setLoadingNextFalse() {
-    this.loading.next(false);
-  }
-
   getAllUsers() {
     return this._http.get('/api/user/');
   }
@@ -40,10 +32,12 @@ export class HttpService {
   }
 
   getOneGame(id) {
+    this.loading.next(true);
     return this._http.get(`/api/game/id/${id}`)
   }
 
   loginUser(sendObj) {
+    this.loading.next(true);
     return this._http.post('/api/user/login', sendObj)
   }
 
