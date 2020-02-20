@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('loginModal', { static: true }) loginModal: ElementRef;
 
   email: string = '';
   username: string = '';
@@ -67,6 +68,9 @@ export class LoginComponent implements OnInit {
       values will still be in inputs
 
     Handle Failures with Modal, on screen elements?
+
+    Error and Success display
+    Make modal display condiditonal information
   */
 
   loginAction() {
@@ -111,7 +115,8 @@ export class LoginComponent implements OnInit {
           console.log(data)
           this.http.loading.next(false)
           this.login = true;
-          // Display create success modal which tells user that were created, need to login
+          // Display create success modal which tells user that they were created, need to login
+          this.showModal();
         },
         (err: any) => {
           console.log(err)
@@ -128,6 +133,14 @@ export class LoginComponent implements OnInit {
       return this.usernameValid = false;
     }
     return this.usernameValid = true;
+  }
+
+  closeModal() {
+    this.loginModal.nativeElement.classList.remove('is-active');
+  }
+
+  showModal() {
+    this.loginModal.nativeElement.classList.add('is-active');
   }
 
   emailValidate() {
