@@ -41,6 +41,22 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /* To Do:
+    Incorperate Http Loader observable and app-loader
+
+    Login success
+      redirect to homepage
+      set user service info to logged in user
+
+    Sign up success
+      launch modal explaining successful signup
+      explain must login
+      switch form to login
+      values will still be in inputs
+
+    Handle Failures with Modal, on screen elements?
+  */
+
   loginAction() {
     const sendObj = {
       email: this.email,
