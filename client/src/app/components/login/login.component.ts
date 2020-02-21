@@ -29,6 +29,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login: boolean = true;
 
+  loginModalTitle: string;
+  loginModalSubtitle: string;
+  loginModalBodyMsgs: string[]
+
+
   loading: boolean;
   loadingSub: Subscription = this.http.loading.subscribe(
     (data: boolean) => {
@@ -125,6 +130,16 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.http.loading.next(false)
           this.login = true;
           // Display create success modal which tells user that they were created, need to login
+
+          this.loginModalTitle = 'Successful Signup!';
+          this.loginModalSubtitle = 'Congratulations';
+          this.loginModalBodyMsgs = [
+            'You have Successfully signed up here at Time Score.',
+            'The only step left is to login to your account.',
+            'Your account information is saved in your browser for 1 week at a time.',
+            'Have fun!'
+          ]
+
           this.showModal();
         },
         (err: any) => {
