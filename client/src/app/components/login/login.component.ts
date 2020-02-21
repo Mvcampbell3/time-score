@@ -1,14 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   @ViewChild('loginModal', { static: true }) loginModal: ElementRef;
 
   email: string = '';
@@ -37,9 +39,13 @@ export class LoginComponent implements OnInit {
     }
   )
 
-  constructor(public http: HttpService, public userServive: UserService) { }
+  constructor(public http: HttpService, public userServive: UserService, public router: Router) { }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.loadingSub.unsubscribe();
   }
 
   switchForms() {
@@ -81,10 +87,13 @@ export class LoginComponent implements OnInit {
     if (this.emailValid && this.passwordLength && this.passwordNumber && this.passwordCapital) {
       console.log('would send login request')
       this.http.loginUser(sendObj).subscribe(
-        (data: { token: string }) => {
-          console.log(data.token);
+        (data: { token: string, userInfo: User }) => {
           // set token to local storage for retrieval in http service
           localStorage.setItem('time-score-token', JSON.stringify(data.token))
+          this.userServive.setUser(true, data.userInfo)
+          this.http.loading.next(false);
+          this.router.navigate(['/']);
+
         },
         (err: any) => {
           console.log(err)
