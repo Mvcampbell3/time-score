@@ -20,7 +20,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   game: Game;
   guess: string;
   timer: any;
-  time: number = 60;
+  time: number = 6;
   scoreGame: number = 0;
   play: boolean = true;
   firstLoad: boolean = true;
@@ -135,9 +135,13 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   gameOver() {
+    clearInterval(this.timer)
     this.ongoing = false;
     this.gameInputEl.nativeElement.disabled = true;
     this.scoreGame = this.game.answers.filter(answer => answer.guessed === true).length;
+    console.log(this.scoreGame / this.game.answers.length, Math.abs(this.time - 60))
+    const percentScore: string = ((this.scoreGame / this.game.answers.length) * 100).toFixed()
+    console.log(percentScore)
     this.play = false;
     this.endGameModal.nativeElement.classList.add('is-active')
   }
