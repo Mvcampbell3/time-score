@@ -29,7 +29,7 @@ module.exports = {
     const sameEmail = await db.User.find({ email });
 
     if (sameUsername.length > 0 || sameEmail.length > 0) {
-      res.json({ username: sameUsername.length, email: sameEmail.length });
+      res.json({ duplicate: true, username: sameUsername.length, email: sameEmail.length });
     } else {
       const hash = await bcrypt.hash(password, parseInt(process.env.SALT_ROUNDS))
 
@@ -50,7 +50,6 @@ module.exports = {
   },
 
   loginUser: (req, res) => {
-    console.log(req.body)
     const { email, password } = req.body;
     db.User.findOne({ email })
       .then(async dbUser => {
@@ -67,7 +66,7 @@ module.exports = {
             if (err) {
               return res.status(500).json({ error: 'Error while creating token' })
             }
-            return res.status(200).json({ token })
+            return res.status(200).json({ token, userInfo: { email: dbUser.email, username: dbUser.username, id: dbUser._id } })
           })
         } else {
           // incorrect pass
