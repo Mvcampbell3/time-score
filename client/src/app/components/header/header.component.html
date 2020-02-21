@@ -18,9 +18,14 @@
 
       <a *ngIf='loggedKnown; else loginRoute' routerLink='{{loggedInUser ? "profile":"login"}}'
         (click)='shutNavMobile()' class="navbar-item">{{loggedInUser ? "Profile":"Login"}}</a>
+
       <ng-template #loginRoute>
         <a routerLink="login" class='navbar-item'>Login</a>
       </ng-template>
+    </div>
+    <div class="navbar-end">
+
+      <a class='navbar-item' *ngIf='loggedInUser' (click)='logoutUser()'>Logout</a>
     </div>
   </div>
 </nav>

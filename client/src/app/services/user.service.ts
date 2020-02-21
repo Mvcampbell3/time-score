@@ -21,5 +21,6 @@ export class UserService {
   logOutUser(): void {
     this.user.next(false);
     this.userInfo = null;
+    localStorage.removeItem('time-score-token')
   }
 }
