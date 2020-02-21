@@ -3,27 +3,34 @@ const db = require('../models');
 module.exports = {
   getAllHighScores: (req, res) => {
     db.HighScore.find()
+      .populate({ path: "game_id", select: "name" })
+      .populate({ path: "user_id", select: "username" })
       .then(highscores => res.json(highscores))
       .catch(err => res.json(err));
   },
 
   getGameHighScores: (req, res) => {
     db.HighScore.find({ game_id: req.params.gameId })
+      .populate({ path: 'game_id', select: 'name' })
+      .populate({ path: 'user_id', select: 'username' })
       .then(gameHighscores => res.json(gameHighscores))
       .catch(err => res.json(err));
   },
 
-  // Run checks on this when you have actuall high scores to load with game.
   getGameHighScoresWithGame: (req, res) => {
     db.HighScore.find({ game_id: req.params.gameId })
-      .populate("game_id")
+      .populate({ path: "game_id", select: "name" })
+      .populate({ path: "user_id", select: "username" })
       .then(gameHighscores => res.json(gameHighscores))
       .catch(err => res.json(err));
   },
 
   // Uses checkAuth middleware for userid
+  // Do we want to use checkAuth, or can anyone see a user's highscores?
   getUserHighScores: (req, res) => {
     db.HighScore.find({ user_id: req.user.id })
+      .populate({ path: "game_id", select: "name" })
+      .populate({ path: "user_id", select: "username" })
       .then(userHighscores => res.json(userHighscores))
       .catch(err => res.json(err));
   },

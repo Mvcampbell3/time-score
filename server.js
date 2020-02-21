@@ -7,7 +7,8 @@ const baseballSeed = require('./seeds/baseballDB_seed');
 let seedBaseball = false;
 const presidentSeed = require('./seeds/presidents_seed');
 let seedPresident = false;
-
+const testSeed = require('./seeds/test_seed');
+let seedTestGame = false;
 
 require('dotenv').config();
 
@@ -29,6 +30,9 @@ mongoose
     }
     if (seedPresident) {
       presidentSeed()
+    }
+    if (seedTestGame) {
+      testSeed();
     }
     app.listen(PORT, () => {
       console.log(`server is live on http://localhost:${PORT}`);
