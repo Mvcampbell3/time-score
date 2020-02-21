@@ -82,7 +82,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         },
         (err: any) => {
-          console.log(err)
+          console.log(err);
+          this.http.loading.next(false);
+          this.populateModal('Login Failure', "Uh Oh!", [
+            'Your login attempt failed!',
+            'Check the spelling of your email and/or password and try again'
+          ])
+
+          this.showModal();
         }
       )
     } else {
