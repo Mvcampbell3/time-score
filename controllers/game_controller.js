@@ -34,10 +34,6 @@ module.exports = {
       .catch(err => res.json(err))
   },
 
-  getOneGameWithHighscores: (req, res) => {
-
-  },
-
   deleteOneGame: (req, res) => {
     db.Game.findByIdAndDelete(req.params.id)
       .then(delGame => res.json(delGame))
