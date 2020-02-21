@@ -29,7 +29,7 @@ module.exports = {
     const sameEmail = await db.User.find({ email });
 
     if (sameUsername.length > 0 || sameEmail.length > 0) {
-      res.json({ username: sameUsername.length, email: sameEmail.length });
+      res.json({ duplicate: true, username: sameUsername.length, email: sameEmail.length });
     } else {
       const hash = await bcrypt.hash(password, parseInt(process.env.SALT_ROUNDS))
 

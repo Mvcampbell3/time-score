@@ -65,35 +65,16 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  /* To Do:
-    Incorperate Http Loader observable and app-loader
-
-    Login success
-      redirect to homepage
-      set user service info to logged in user
-
-    Sign up success
-      launch modal explaining successful signup
-      explain must login
-      switch form to login
-      values will still be in inputs
-
-    Handle Failures with Modal, on screen elements?
-
-    Error and Success display
-    Make modal display condiditonal information
-  */
-
   loginAction() {
-    const sendObj = {
-      email: this.email,
-      password: this.password1
-    }
+
     if (this.emailValid && this.passwordLength && this.passwordNumber && this.passwordCapital) {
+      const sendObj = {
+        email: this.email,
+        password: this.password1
+      };
       console.log('would send login request')
       this.http.loginUser(sendObj).subscribe(
         (data: { token: string, userInfo: User }) => {
-          // set token to local storage for retrieval in http service
           localStorage.setItem('time-score-token', JSON.stringify(data.token))
           this.userServive.setUser(true, data.userInfo)
           this.http.loading.next(false);
@@ -110,11 +91,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   signupAction() {
-    const sendObj = {
-      username: this.username,
-      email: this.email,
-      password: this.password1
-    }
     if (
       this.emailValid &&
       this.passwordLength &&
@@ -123,28 +99,46 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.passwordMatch &&
       this.usernameValid
     ) {
-      console.log('would send sign up request')
+      console.log('would send sign up request');
+      const sendObj = {
+        username: this.username,
+        email: this.email,
+        password: this.password1
+      };
       this.http.createUser(sendObj).subscribe(
         (data: any) => {
-          console.log(data)
+          // data can contain dupicate prop which means there was a duplicate email and/or username already in db;
           this.http.loading.next(false)
-          this.login = true;
-          // Display create success modal which tells user that they were created, need to login
 
-          this.loginModalTitle = 'Successful Signup!';
-          this.loginModalSubtitle = 'Congratulations';
-          this.loginModalBodyMsgs = [
-            'You have Successfully signed up here at Time Score.',
-            'The only step left is to login to your account.',
-            'Your account information is saved in your browser for 1 week at a time.',
-            'Have fun!'
-          ]
+          console.log(data)
+          if (!data.duplicate) {
+            // Successful User Creation
+            this.login = true;
 
-          this.showModal();
+            this.populateModal('Successful Signup', "Congratualtions", [
+              'You have Successfully signed up here at Time Score.',
+              'The only step left is to login to your account.',
+              'Your account information is saved in your browser for 1 week at a time.',
+              'Have fun!'
+            ])
+
+            this.showModal();
+          } else {
+            // Failed User Creation because of dup email/username
+            let msgArrDB = [];
+            data.username > 0 ? msgArrDB.push('That username is already in use!') : null;
+            data.email > 0 ? msgArrDB.push('That email is already in use!') : null;
+            this.populateModal('Unsuccessful Signup', "Uh Oh!", msgArrDB)
+
+            this.showModal();
+          }
         },
         (err: any) => {
           console.log(err)
-          this.http.loading.next(false)
+          // Failed User Creation for another reason
+          this.http.loading.next(false);
+          this.populateModal('Unsuccessful Sign Up', 'Uh Oh!', ['Something went wrong, please try again!'])
+          this.showModal()
         }
       )
     } else {
@@ -161,6 +155,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.loginModal.nativeElement.classList.remove('is-active');
+  }
+
+  populateModal(title, subtitle, msgArr) {
+    this.loginModalTitle = title;
+    this.loginModalSubtitle = subtitle;
+    this.loginModalBodyMsgs = msgArr;
   }
 
   showModal() {
