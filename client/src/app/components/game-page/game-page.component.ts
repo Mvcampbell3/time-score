@@ -122,6 +122,11 @@ export class GamePageComponent implements OnInit, OnDestroy {
     })
     if (wasRight) {
       this.clearInput();
+      // run check to see if there are any answers that have guessed = false;
+      if (this.game.answers.filter(answer => answer.guessed === false).length === 0) {
+        // This is end of the game as well
+        this.gameOver();
+      }
     }
   }
 
