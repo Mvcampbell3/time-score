@@ -25,4 +25,28 @@ const HighScoreSchema = new Schema({
   }
 })
 
+HighScoreSchema.pre('save', function(next) {
+  const User = require('./User');
+  User.findByIdAndUpdate(this.user_id, { $push: { highScoreArray: this._id } })
+    .then(result => {
+      console.log(result)
+      next()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+HighScoreSchema.pre('remove', function(next) {
+  const User = require('./User');
+  User.findByIdAndUpdate(this.user_id, { $pull: { highScoreArray: this._id } })
+    .then(result => {
+      console.log(result)
+      next()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
 module.exports = HighScore = mongoose.model('HighScore', HighScoreSchema);
