@@ -22,6 +22,11 @@ export class HttpService {
     return { headers }
   }
 
+  checkToken() {
+    return this._http.get('/api/user/checkAuth', this.setAuthorization())
+  }
+
+  // Dev Route
   getAllUsers() {
     return this._http.get('/api/user/');
   }
@@ -46,7 +51,13 @@ export class HttpService {
     return this._http.post('/api/user', sendObj);
   }
 
-  checkToken() {
-    return this._http.get('/api/user/checkAuth', this.setAuthorization())
+  getHighscoresForGame(gameId) {
+    this.loading.next(true);
+    return this._http.get(`/api/highscore/test/${gameId}`)
+  }
+
+  getHighscoresForUser(userId) {
+    this.loading.next(true);
+    return this._http.get(`/api/highscore/test/${userId}`, this.setAuthorization())
   }
 }

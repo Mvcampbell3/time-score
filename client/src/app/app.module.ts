@@ -12,6 +12,7 @@ import { InstructionsComponent } from './components/instructions/instructions.co
 import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     InstructionsComponent,
     LoginComponent,
     HeaderComponent,
-    LoaderComponent
+    LoaderComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
