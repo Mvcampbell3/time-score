@@ -17,6 +17,12 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: true
+  },
+
+  highScoreArray: {
+    type: [Schema.Types.ObjectId],
+    ref: 'HighScore',
+    default: []
   }
 })
 
