@@ -10,6 +10,8 @@ let seedPresident = false;
 const testSeed = require('./seeds/test_seed');
 let seedTestGame = false;
 
+const db = require('./models');
+
 require('dotenv').config();
 
 app.use(express.urlencoded({ extended: true }));
@@ -34,6 +36,14 @@ mongoose
     if (seedTestGame) {
       testSeed();
     }
+
+
+    // db.User.deleteMany()
+    //   .then(result => { console.log(result) })
+    // db.HighScore.deleteMany()
+    //   .then(result => console.log(result))
+
+
     app.listen(PORT, () => {
       console.log(`server is live on http://localhost:${PORT}`);
     });

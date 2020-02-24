@@ -12,5 +12,6 @@ router.get('/test/:gameId', highscore_controller.getGameHighScoresWithGame)
 
 router.get('/user/:userId', checkAuth, highscore_controller.getUserHighScores)
 
+router.delete('/delete/:id', highscore_controller.deleteHighscore)
 
 module.exports = router;

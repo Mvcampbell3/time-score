@@ -20,7 +20,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   game: Game;
   guess: string;
   timer: any;
-  time: number = 6;
+  time: number = 60;
   scoreGame: number = 0;
   play: boolean = true;
   firstLoad: boolean = true;

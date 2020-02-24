@@ -43,5 +43,13 @@ module.exports = {
     newScore.save()
       .then(score => res.json(score))
       .catch(err => res.json(err))
+  },
+
+  deleteHighscore: (req, res) => {
+    db.HighScore.findOneAndDelete({ _id: req.params.id })
+      .then(results => {
+        res.json(results)
+      })
+      .catch(err => res.json(err))
   }
 }
