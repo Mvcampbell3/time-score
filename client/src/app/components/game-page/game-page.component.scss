@@ -55,14 +55,14 @@
 }
 
 .not-guessed {
-  background-color: whitesmoke;
-  color: whitesmoke;
+  background-color: #555;
+  color: #555;
   user-select: none;
 }
 
 .missed {
-  color: white;
-  background-color: #f14668;
+  background-color: white;
+  color: #f14668;
   opacity: 0;
   animation-name: popIn;
   animation-duration: 0.5s;
@@ -70,8 +70,8 @@
 }
 
 .guessed {
-  color: white;
-  background-color: #48c774;
+  color: #48c774;
+  background-color: white;
   opacity: 0;
   animation-name: popIn;
   animation-duration: 0.5s;

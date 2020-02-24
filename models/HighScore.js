@@ -44,7 +44,7 @@ HighScoreSchema.pre('findOneAndDelete', function(next) {
   console.log('pre remove schema middleware ran')
   User.findOneAndUpdate({ "highScoreArray": this._conditions._id }, { $pull: { 'highScoreArray': this._conditions._id } })
     .then(result => {
-      console.log('pulled highscire from user highScores array')
+      console.log('pulled highscore from user highScores array')
       next()
 
     })
