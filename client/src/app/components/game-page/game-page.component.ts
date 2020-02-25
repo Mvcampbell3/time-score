@@ -46,6 +46,12 @@ export class GamePageComponent implements OnInit, OnDestroy {
     this.getGameFromDB(id);
   }
 
+  ngOnDestroy() {
+    this.loadingSub.unsubscribe();
+    this.game = null;
+    this.resetGame()
+  }
+
   getGameFromDB(id) {
     this.http.getOneGame(id).subscribe(
       (data: Game) => {
@@ -59,16 +65,6 @@ export class GamePageComponent implements OnInit, OnDestroy {
         console.log(err)
       }
     )
-  }
-
-  ngOnDestroy() {
-    this.loadingSub.unsubscribe();
-    this.game = null;
-    this.resetGame()
-  }
-
-  clearGameAnswers() {
-
   }
 
   startGame() {
@@ -92,7 +88,6 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   leaveGame() {
-    this.clearGameAnswers();
     this.game = null;
     this.resetGame()
     this.back.emit();
@@ -147,11 +142,8 @@ export class GamePageComponent implements OnInit, OnDestroy {
     this.endGameModal.nativeElement.classList.add('is-active')
   }
 
-  closeModal(goToList: boolean) {
+  closeModal() {
     this.endGameModal.nativeElement.classList.remove('is-active');
-    if (goToList) {
-      this.leaveGame()
-    }
   }
 
 }
