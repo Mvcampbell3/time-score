@@ -15,7 +15,6 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class GamePageComponent implements OnInit, OnDestroy {
   @ViewChild('gameInput', { static: false }) gameInputEl: ElementRef;
   @ViewChild('endGameModal', { static: false }) endGameModal: ElementRef;
-  @Output() back: EventEmitter<void> = new EventEmitter;
 
   game: Game;
   guess: string;
@@ -85,12 +84,6 @@ export class GamePageComponent implements OnInit, OnDestroy {
     this.play = true;
     this.guess = '';
     clearInterval(this.timer)
-  }
-
-  leaveGame() {
-    this.game = null;
-    this.resetGame()
-    this.back.emit();
   }
 
   initTimer() {
