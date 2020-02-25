@@ -1,4 +1,4 @@
-<div *ngIf='!selected else gameArea'>
+<div *ngIf='!selected else gameInfo'>
   <app-loader *ngIf='loading'></app-loader>
   <div #listbg class="list-bg">
 
@@ -11,7 +11,8 @@
 
     <div class="container">
       <div class="games-container">
-        <div *ngFor='let game of gamesArray; let i = index' [ngClass]="setClasses(i)" (click)='selectGame(game._id)'>
+        <div *ngFor='let game of gamesArray; let i = index' [ngClass]="setClasses(i)"
+          (click)='selectGame(game.name, game._id, game.instructions, game.description)'>
           {{game.name}}</div>
       </div>
     </div>
@@ -19,6 +20,9 @@
 
 </div>
 
-<!-- <ng-template #gameArea>
-  <app-game-page [gameTitle]='selectedGame' [gameId]='selectedGameId' (back)='returnFromGame()'></app-game-page>
-</ng-template> -->
+<ng-template #gameInfo>
+  <app-game-description [gameTitle]='selectedGameTitle' [gameId]='selectedGameId'
+    [gameInstructions]='selectedGameInstructions' [gameDescription]='selectedGameDescription'
+    (backList)='returnFromInfo()'>
+  </app-game-description>
+</ng-template>
