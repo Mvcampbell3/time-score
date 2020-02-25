@@ -1,15 +1,7 @@
 <div class="game-page-bg">
+  <app-loader *ngIf='loading'></app-loader>
 
-
-  <div class="hero is-white">
-    <div class="hero-body">
-      <h2 class="title">Test</h2>
-    </div>
-  </div>
-
-  <!-- <app-loader *ngIf='loading'></app-loader> -->
-
-  <!-- <div class="modal" #endGameModal>
+  <div class="modal" #endGameModal>
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
@@ -39,9 +31,9 @@
       <div class="modal-card-foot">
       </div>
     </div>
-  </div> -->
+  </div>
 
-  <!-- <div class="hero is-small is-info pb-2" *ngIf='!loading'>
+  <div class="hero is-small is-info pb-2" *ngIf='!loading'>
     <div class="hero-body">
       <div class="container">
         <div class="columns">
@@ -96,6 +88,6 @@
       </div>
     </div>
   </div>
--->
+
 
 </div>

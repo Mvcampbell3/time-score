@@ -3,7 +3,6 @@ import { Game } from '../../models/game';
 import { Answer } from '../../models/answer';
 import { HttpService } from 'src/app/services/http.service';
 import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -14,11 +13,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 
 export class GamePageComponent implements OnInit, OnDestroy {
-  // @ViewChild('gameInput', { static: false }) gameInputEl: ElementRef;
-  // @ViewChild('endGameModal', { static: false }) endGameModal: ElementRef;
-  // @Input() gameTitle: string;
-  // @Input() gameId: string;
-  // @Output() back: EventEmitter<void> = new EventEmitter;
+  @ViewChild('gameInput', { static: false }) gameInputEl: ElementRef;
+  @ViewChild('endGameModal', { static: false }) endGameModal: ElementRef;
+  @Output() back: EventEmitter<void> = new EventEmitter;
 
   game: Game;
   guess: string;
@@ -29,14 +26,13 @@ export class GamePageComponent implements OnInit, OnDestroy {
   firstLoad: boolean = true;
   ongoing: boolean = false;
 
-  // loading: boolean;
+  loading: boolean;
 
-  // loadingSub: Subscription = this.http.loading.subscribe(
-  //   (data: boolean) => {
-  //     this.loading = data;
-  //   }
-  // );
-  test: any;
+  loadingSub: Subscription = this.http.loading.subscribe(
+    (data: boolean) => {
+      this.loading = data;
+    }
+  );
 
   constructor(
     public http: HttpService,
@@ -48,7 +44,6 @@ export class GamePageComponent implements OnInit, OnDestroy {
     let id = this.route.snapshot.paramMap.get('id');
     console.log(id);
     this.getGameFromDB(id);
-
   }
 
   getGameFromDB(id) {
@@ -67,13 +62,9 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.loadingSub.unsubscribe();
-    // if (this.gameTitle !== '') {
-    //   this.clearGameAnswers()
-    // }
-    // this.gameTitle = '';
-    // this.game = null;
-    // this.resetGame()
+    this.loadingSub.unsubscribe();
+    this.game = null;
+    this.resetGame()
   }
 
   clearGameAnswers() {
@@ -101,24 +92,23 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   leaveGame() {
-    // this.clearGameAnswers();
-    // this.gameTitle = '';
-    // this.game = null;
-    // this.resetGame()
-    // this.back.emit();
+    this.clearGameAnswers();
+    this.game = null;
+    this.resetGame()
+    this.back.emit();
   }
 
   initTimer() {
-    // this.gameInputEl.nativeElement.disabled = false;
-    // this.gameInputEl.nativeElement.focus()
-    // this.timer = setInterval(() => {
-    //   if (this.time <= 0) {
-    //     clearInterval(this.timer);
-    //     this.gameOver()
-    //   } else {
-    //     this.time--
-    //   }
-    // }, 1000)
+    this.gameInputEl.nativeElement.disabled = false;
+    this.gameInputEl.nativeElement.focus()
+    this.timer = setInterval(() => {
+      if (this.time <= 0) {
+        clearInterval(this.timer);
+        this.gameOver()
+      } else {
+        this.time--
+      }
+    }, 1000)
   }
 
   evaluateInput() {
@@ -146,22 +136,22 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   gameOver() {
-    // clearInterval(this.timer)
-    // this.ongoing = false;
-    // this.gameInputEl.nativeElement.disabled = true;
-    // this.scoreGame = this.game.answers.filter(answer => answer.guessed === true).length;
-    // console.log(this.scoreGame / this.game.answers.length, Math.abs(this.time - 60))
-    // const percentScore: string = ((this.scoreGame / this.game.answers.length) * 100).toFixed()
-    // console.log(percentScore)
-    // this.play = false;
-    // this.endGameModal.nativeElement.classList.add('is-active')
+    clearInterval(this.timer)
+    this.ongoing = false;
+    this.gameInputEl.nativeElement.disabled = true;
+    this.scoreGame = this.game.answers.filter(answer => answer.guessed === true).length;
+    console.log(this.scoreGame / this.game.answers.length, Math.abs(this.time - 60))
+    const percentScore: string = ((this.scoreGame / this.game.answers.length) * 100).toFixed()
+    console.log(percentScore)
+    this.play = false;
+    this.endGameModal.nativeElement.classList.add('is-active')
   }
 
   closeModal(goToList: boolean) {
-    // this.endGameModal.nativeElement.classList.remove('is-active');
-    // if (goToList) {
-    //   this.leaveGame()
-    // }
+    this.endGameModal.nativeElement.classList.remove('is-active');
+    if (goToList) {
+      this.leaveGame()
+    }
   }
 
 }
