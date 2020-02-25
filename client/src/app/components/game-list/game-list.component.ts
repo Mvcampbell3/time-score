@@ -14,8 +14,11 @@ export class GameListComponent implements OnInit, OnDestroy {
 
   gamesArray: Game[] = [];
   selected: boolean = false;
-  selectedGame: string = '';
+
+  selectedGameTitle: string = '';
   selectedGameId: string = '';
+  selectedGameDescription: string = '';
+  selectedGameInstructions: string = '';
 
   loading: boolean;
 
@@ -71,8 +74,11 @@ export class GameListComponent implements OnInit, OnDestroy {
     }, 6000)
   }
 
-  selectGame(id) {
+  selectGame(title: string, id: string, instructions: string, description: string) {
+    this.selectedGameTitle = title;
     this.selectedGameId = id;
+    this.selectedGameInstructions = instructions;
+    this.selectedGameDescription = description;
     clearInterval(this.timerPlace);
     this.selected = true;
   }
@@ -82,8 +88,10 @@ export class GameListComponent implements OnInit, OnDestroy {
     this.listbg.nativeElement.classList.add(this.bgClasses[num]);
   }
 
-  returnFromGame() {
-    this.selectedGame = '';
+  returnFromInfo() {
+    this.selectedGameTitle = '';
+    this.selectedGameDescription = '';
+    this.selectedGameInstructions = '';
     this.selected = false;
     this.selectedGameId = ''
     this.startTimer()

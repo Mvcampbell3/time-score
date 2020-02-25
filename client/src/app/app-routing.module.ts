@@ -5,6 +5,7 @@ import { GameListComponent } from './components/game-list/game-list.component';
 import { InstructionsComponent } from './components/instructions/instructions.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { GamePageComponent } from './components/game-page/game-page.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'gameslist', component: GameListComponent },
   { path: 'instructions', component: InstructionsComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'game/:id', component: GamePageComponent }
 ];
 
 @NgModule({

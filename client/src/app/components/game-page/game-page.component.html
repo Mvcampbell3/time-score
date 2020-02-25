@@ -1,5 +1,4 @@
 <div class="game-page-bg">
-
   <app-loader *ngIf='loading'></app-loader>
 
   <div class="modal" #endGameModal>
@@ -22,10 +21,10 @@
         </div>
         <div class="level">
           <div class="level-left">
-            <button class="button is-info level-item" (click)='closeModal(false)'>View Results</button>
+            <button class="button is-info level-item" (click)='closeModal()'>View Results/Play Again</button>
           </div>
           <div class="level-right">
-            <button class="button is-success level-item" (click)='closeModal(true)'>Back to Games List</button>
+            <a class="button is-success level-item" routerLink='/gameslist'>Back to Games List</a>
           </div>
         </div>
       </section>
@@ -65,7 +64,7 @@
             </ng-template>
           </div>
           <div class="level-item has-text-centered">
-            <button class="button is-danger" (click)='leaveGame()'>Back</button>
+            <a class="button is-danger" routerLink='/gameslist'>Back</a>
           </div>
         </div>
       </div>
@@ -89,5 +88,6 @@
       </div>
     </div>
   </div>
+
 
 </div>

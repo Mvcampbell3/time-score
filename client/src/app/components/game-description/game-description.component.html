@@ -1,0 +1,7 @@
+<p>{{gameTitle}}</p>
+<p>{{gameId}}</p>
+<p>{{gameInstructions}}</p>
+<p>{{gameDescription}}</p>
+
+<a [routerLink]="['/game', gameId]">Play</a>
+<button class="button is-danger is-inverted" (click)='backToList()'>Back</button>
