@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { GameDescriptionComponent } from './components/game-description/game-description.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     LoginComponent,
     HeaderComponent,
     LoaderComponent,
-    ProfileComponent
+    ProfileComponent,
+    GameDescriptionComponent
   ],
   imports: [
     BrowserModule,
