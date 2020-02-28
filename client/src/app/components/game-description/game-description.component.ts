@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-game-description',
@@ -13,9 +14,25 @@ export class GameDescriptionComponent implements OnInit {
 
   @Output() backList: EventEmitter<void> = new EventEmitter;
 
-  constructor() { }
+  highScoresLoaded: boolean = false;
+
+  constructor(public http: HttpService) { }
 
   ngOnInit() {
+    this.grabHighScores()
+  }
+
+  grabHighScores() {
+    this.http.getHighscoresForGame(this.gameId).subscribe(
+      (data: any) => {
+        console.log(data)
+
+        this.highScoresLoaded = true;
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
   }
 
   backToList() {

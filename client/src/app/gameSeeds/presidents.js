@@ -14,8 +14,8 @@ const tyler = new Answer('John Tyler', ['tyler']);
 const polk = new Answer('James K. Polk', ['polk', 'napoleon of the south'])
 const taylor = new Answer('Zachary Taylor', ['taylor']);
 const fillmore = new Answer('Millard Fillmore', ['fillmore']);
-const pierce = new Answer('Franklin Pierce', ['pierce']);
 const buchanan = new Answer('James Buchanan', ['buchanan']);
+const pierce = new Answer('Franklin Pierce', ['pierce']);
 const lincoln = new Answer('Abraham Lincoln', ['lincoln']);
 const aJohnson = new Answer('Andrew Johnson', ['johnson']);
 const grant = new Answer('Ulysses S. Grant', ['grant']);
@@ -47,6 +47,6 @@ const bush_43 = new Answer('George W. Bush', ['bush']);
 const obama = new Answer('Barrack Obama', ['obama']);
 const trump = new Answer('Donald Trump', ['trump']);
 
-const presidentNames = new Game('U.S. Presidents', 'Enter President\'s Name...', 'All of the United States Presidents', 'If two presidents share last names, they both will count! First names do not count towards correct answers.', [washington, bigAdams, jefferson, madison, monroe, littleAdams, jackson, buren, whHarrison, tyler, polk, taylor, pierce, fillmore, buchanan, lincoln, aJohnson, grant, hayes, garfield, authur, cleveland, bHarrison, cleveland2, mckinley, tRoosevelt, taft, wilson, harding, coolidge, hoover, fdRoosevelt, truman, eisenhower, kennedy, lbJohnson, nixon, ford, carter, reagan, bush_41, clinton, bush_43, obama, trump])
+const presidentNames = new Game('U.S. Presidents', 'Enter President\'s Name...', 'All of the United States Presidents', 'If two presidents share last names, they both will count! First names do not count towards correct answers.', [washington, bigAdams, jefferson, madison, monroe, littleAdams, jackson, buren, whHarrison, tyler, polk, taylor, fillmore, pierce, buchanan, lincoln, aJohnson, grant, hayes, garfield, authur, cleveland, bHarrison, cleveland2, mckinley, tRoosevelt, taft, wilson, harding, coolidge, hoover, fdRoosevelt, truman, eisenhower, kennedy, lbJohnson, nixon, ford, carter, reagan, bush_41, clinton, bush_43, obama, trump])
 
 export default presidentNames;
