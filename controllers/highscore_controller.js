@@ -21,6 +21,7 @@ module.exports = {
     db.HighScore.find({ game_id: req.params.gameId })
       .populate({ path: "game_id", select: "name" })
       .populate({ path: "user_id", select: "username" })
+      .sort('-total_score')
       .then(gameHighscores => res.json(gameHighscores))
       .catch(err => res.json(err));
   },

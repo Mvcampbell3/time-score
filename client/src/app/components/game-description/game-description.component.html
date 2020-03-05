@@ -5,3 +5,7 @@
 
 <a [routerLink]="['/game', gameId]">Play</a>
 <button class="button is-danger is-inverted" (click)='backToList()'>Back</button>
+
+<div *ngFor='let highscore of highScoreArray'>
+  <p>{{highscore.user_id.username}} {{highscore.total_score}}</p>
+</div>
