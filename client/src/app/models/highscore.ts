@@ -1,6 +1,6 @@
 export class HighScore {
   public total_score: number;
-  public id: string;
+  public _id: string;
   public user_id: { _id: string, username: string };
   public game_id: { _id: string, name: string };
   public score: number;
@@ -15,7 +15,7 @@ export class HighScore {
     time_left: number
   ) {
     this.total_score = total_score;
-    this.id = _id;
+    this._id = _id;
     this.user_id = user_id;
     this.game_id = game_id;
     this.score = score;
