@@ -10,7 +10,7 @@ module.exports = function() {
         description: 'Name all Major League Baseball Teams',
         inputPlaceholder: 'Enter MLB Team Here...',
         instructions: 'Only team name will count towards correct answers, city names will not',
-        creatorId: '5e4467962d3d3180bc9cacd3',
+        creatorId: '5e615a6c8a481b4064db6bc5',
         answers: [
           // AL East
           { display_value: 'Baltimore Orioles', accepted_values: ['orioles'] },

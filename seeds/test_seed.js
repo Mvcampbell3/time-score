@@ -6,7 +6,7 @@ module.exports = function() {
     description: 'Used for testing end game',
     instructions: 'Don\'t mess this up',
     inputPlaceholder: 'baseball football hockey',
-    creatorId: '5e4467962d3d3180bc9cacd3',
+    creatorId: '5e615a6c8a481b4064db6bc5',
     answers: [
       { display_value: 'Baseball', accepted_values: ['baseball'] },
       { display_value: 'Football', accepted_values: ['football'] },

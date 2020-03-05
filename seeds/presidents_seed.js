@@ -10,7 +10,7 @@ module.exports = function() {
         inputPlaceholder: 'Enter President\'s Name Here...',
         description: 'All United States Presidents',
         instructions: 'Last names will count towards correct answers, first names will not. If two presidents share a last name, both will be counted!',
-        creatorId: '5e4467962d3d3180bc9cacd3',
+        creatorId: '5e615a6c8a481b4064db6bc5',
         answers: [
           { display_value: 'George Washington', accepted_values: ['washington'] },
           { display_value: 'John Adams', accepted_values: ['adams'] },

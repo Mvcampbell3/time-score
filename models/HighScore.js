@@ -22,10 +22,16 @@ const HighScoreSchema = new Schema({
   time_left: {
     type: Number,
     required: true
+  },
+
+  total_score: {
+    type: Number,
+    default: 0
   }
 })
 
 HighScoreSchema.pre('save', function(next) {
+  this.total_score = this.score + this.time_left;
   const User = require('./User');
   User.findByIdAndUpdate(this.user_id, { $push: { highScoreArray: this._id } })
     .then(result => {
