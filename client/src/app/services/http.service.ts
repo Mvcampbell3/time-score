@@ -32,31 +32,37 @@ export class HttpService {
   }
 
   getAllGames() {
+    console.log('get all games set loading true')
     this.loading.next(true);
     return this._http.get('/api/game');
   }
 
   getOneGame(id) {
+    console.log('get one game set loading true')
     this.loading.next(true);
     return this._http.get(`/api/game/id/${id}`)
   }
 
   loginUser(sendObj) {
+    console.log('login user set loading true')
     this.loading.next(true);
     return this._http.post('/api/user/login', sendObj);
   }
 
   createUser(sendObj) {
+    console.log('create user set loading true')
     this.loading.next(true);
     return this._http.post('/api/user', sendObj);
   }
 
   getHighscoresForGame(gameId) {
+    console.log('get highscores for game set loading true')
     this.loading.next(true);
     return this._http.get(`/api/highscore/test/${gameId}`)
   }
 
   getHighscoresForUser(userId) {
+    console.log('get highscores for uset set loading true')
     this.loading.next(true);
     return this._http.get(`/api/highscore/test/${userId}`, this.setAuthorization())
   }

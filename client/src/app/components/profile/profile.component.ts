@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   grabUserHighScores() {
     console.log('running grab user highscores')
     if (this.userService.userInfo) {
-      console.log('subbing to subscription')
+      console.log('subbing to userService subscription')
       this.getHighScores = this.http.getHighscoresForUser(this.userService.userInfo.id).subscribe(
         (data: any) => {
           console.log(data)

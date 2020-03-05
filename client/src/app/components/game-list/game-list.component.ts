@@ -24,6 +24,7 @@ export class GameListComponent implements OnInit, OnDestroy {
 
   loadingSub: Subscription = this.http.loading.subscribe(
     (data: boolean) => {
+      console.log(data)
       this.loading = data;
     }
   );
@@ -35,6 +36,7 @@ export class GameListComponent implements OnInit, OnDestroy {
   constructor(public http: HttpService) { }
 
   ngOnInit() {
+    console.log('ran ng on init')
     this.getAllGames()
     setTimeout(() => {
       this.setBackgroundColor(0);
@@ -44,10 +46,12 @@ export class GameListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.timerPlace = null;
+    console.log('ran destroy')
     this.loadingSub.unsubscribe();
   }
 
   getAllGames() {
+    console.log('get all games ran again')
     this.http.getAllGames().subscribe(
       (data: Game[]) => {
         console.log(data)
@@ -94,6 +98,8 @@ export class GameListComponent implements OnInit, OnDestroy {
     this.selectedGameInstructions = '';
     this.selected = false;
     this.selectedGameId = ''
+    console.log('back from info received')
+    console.log(this.loading)
     this.startTimer()
   }
 

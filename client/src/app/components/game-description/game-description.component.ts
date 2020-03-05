@@ -16,6 +16,8 @@ export class GameDescriptionComponent implements OnInit {
 
   highScoresLoaded: boolean = false;
 
+
+
   constructor(public http: HttpService) { }
 
   ngOnInit() {
@@ -28,6 +30,7 @@ export class GameDescriptionComponent implements OnInit {
         console.log(data)
 
         this.highScoresLoaded = true;
+        this.http.loading.next(false)
       },
       (err: any) => {
         console.log(err)
