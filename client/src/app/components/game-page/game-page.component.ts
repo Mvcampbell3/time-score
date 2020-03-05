@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { Subscription } from 'rxjs';
 
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-game-page',
@@ -19,12 +20,13 @@ export class GamePageComponent implements OnInit, OnDestroy {
   game: Game;
   guess: string;
   timer: any;
-  time: number = 60;
+  time: number = 600;
+  displayTime: string = '60.0';
   scoreGame: number = 0;
   play: boolean = true;
   firstLoad: boolean = true;
   ongoing: boolean = false;
-
+  gameId: string = '';
   loading: boolean;
 
   loadingSub: Subscription = this.http.loading.subscribe(
@@ -36,12 +38,14 @@ export class GamePageComponent implements OnInit, OnDestroy {
   constructor(
     public http: HttpService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public user: UserService
   ) { }
 
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
     console.log(id);
+    this.gameId = id;
     this.getGameFromDB(id);
   }
 
@@ -95,13 +99,14 @@ export class GamePageComponent implements OnInit, OnDestroy {
         this.gameOver()
       } else {
         this.time--
+        this.displayTime = (this.time / 10).toFixed(1).toString();
       }
-    }, 1000)
+    }, 100)
   }
 
   evaluateInput() {
     const answerArr: Answer[] = this.game.answers.filter(answer => answer.guessed === false);
-    console.log(answerArr)
+    // console.log(answerArr)
     let wasRight: boolean = false;
     answerArr.forEach((item: Answer) => {
       const rightTeam: boolean = item.checkAnswer(this.guess.trim().toLowerCase());
@@ -128,11 +133,35 @@ export class GamePageComponent implements OnInit, OnDestroy {
     this.ongoing = false;
     this.gameInputEl.nativeElement.disabled = true;
     this.scoreGame = this.game.answers.filter(answer => answer.guessed === true).length;
-    console.log(this.scoreGame / this.game.answers.length, Math.abs(this.time - 60))
+    console.log(this.scoreGame / this.game.answers.length, Math.abs(this.time - 600))
     const percentScore: string = ((this.scoreGame / this.game.answers.length) * 100).toFixed()
     console.log(percentScore)
+    const timeScore = this.time / 10;
+    console.log(timeScore)
     this.play = false;
-    this.endGameModal.nativeElement.classList.add('is-active')
+    // Run User Check
+    // if User run highscore create
+    console.log(this.user.userInfo)
+    if (this.user.userInfo.id) {
+      console.log(this.user.userInfo.id)
+      this.createHighScore(percentScore, timeScore, this.user.userInfo.id);
+    } else {
+      this.endGameModal.nativeElement.classList.add('is-active')
+    }
+  }
+
+  createHighScore(score, time_left, userId) {
+    this.http.createHighScore(this.gameId, userId, score, time_left).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.http.loading.next(false);
+        this.endGameModal.nativeElement.classList.add('is-active')
+      },
+      (err: any) => {
+        console.log(err);
+        this.http.loading.next(false)
+      }
+    )
   }
 
   closeModal() {

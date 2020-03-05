@@ -58,7 +58,7 @@
             <button class="button is-success" (click)='startGame()'>{{ongoing ? "Restart":"Start"}}</button>
           </div>
           <div class="level-item has-text-centered">
-            <h3 class='has-text-centered' *ngIf='play; else score'>Time left: {{time}}</h3>
+            <h3 class='has-text-centered' *ngIf='play; else score'>Time left: {{displayTime}}</h3>
             <ng-template #score>
               <h3 class='has-text-centered'>You got {{scoreGame}} right!</h3>
             </ng-template>

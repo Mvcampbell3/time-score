@@ -62,8 +62,20 @@ export class HttpService {
   }
 
   getHighscoresForUser(userId) {
-    console.log('get highscores for uset set loading true')
+    console.log('get highscores for user set loading true')
     this.loading.next(true);
     return this._http.get(`/api/highscore/test/${userId}`, this.setAuthorization())
+  }
+
+  createHighScore(game_id, user_id, score, time_left) {
+    console.log('create highscore for game set loading true');
+    this.loading.next(true);
+    const sendObj = {
+      user_id,
+      game_id,
+      score,
+      time_left
+    }
+    return this._http.post('/api/highscore', sendObj)
   }
 }
