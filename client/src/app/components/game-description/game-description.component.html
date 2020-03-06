@@ -1,8 +1,3 @@
-<!-- <p>{{gameTitle}}</p>
-<p>{{gameId}}</p>
-<p>{{gameInstructions}}</p>
-<p>{{gameDescription}}</p> -->
-
 <div class="hero is-info">
   <div class="hero-body has-text-centered">
     <h3 class="title">{{gameTitle}}</h3>
@@ -13,13 +8,39 @@
       <button class="button is-danger" (click)='backToList()'>Back</button>
     </div>
   </div>
-
-
 </div>
 
+<div class="level mt-1">
+  <div class="level-item">
+    <h3 class="title">Highscores List</h3>
+  </div>
+</div>
+<div class="level mt-1">
+  <div class="level-item">
+    <h3 class="subtitle">Rank</h3>
+  </div>
+  <div class="level-item">
+    <h3 class="subtitle">Username</h3>
+  </div>
+  <div class="level-item">
+    <h3 class="subtitle">Percent Correct</h3>
+  </div>
+  <div class="level-item">
+    <h3 class="subtitle">Time Left</h3>
+  </div>
+</div>
 
-
-
-<div *ngFor='let highscore of highScoreArray'>
-  <p>{{highscore.user_id.username}} {{highscore.total_score}}</p>
+<div *ngFor='let highscore of highScoreArray; let i = index' class='level'>
+  <div class="level-item">
+    <h3 class="subtitle">{{i + 1}}</h3>
+  </div>
+  <div class="level-item">
+    <h3 class="subtitle">{{highscore.user_id.username}}</h3>
+  </div>
+  <div class="level-item">
+    <h3 class="subtitle">{{highscore.score}}%</h3>
+  </div>
+  <div class="level-item">
+    <h3 class="subtitle">{{highscore.time_left}}</h3>
+  </div>
 </div>
