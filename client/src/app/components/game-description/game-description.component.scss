@@ -6,12 +6,14 @@
   column-gap: 0.5em;
 }
 
-// 3298DC
-
 .desc-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: calc(100vh - 52px);
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .splash {
@@ -23,6 +25,62 @@
   min-height: 100%;
 }
 
+.splash-body {
+  max-width: 300px;
+  position: relative;
+  top: -50px;
+}
+
 .splash h3.title {
   color: white;
+}
+
+.right-side {
+  padding: 0px 20px;
+  // background-color: green;
+  @media (max-width: 600px) {
+    padding: 0px 5px;
+  }
+}
+
+.highscore,
+.highscore-title {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 0.5em;
+
+  .hs-item {
+    border-right: 1px black solid;
+    width: 100%;
+    text-align: center;
+  }
+
+  .time {
+    border-right: none;
+  }
+}
+
+.highscore-title {
+  border-bottom: 3px black solid;
+
+  @media (max-width: 600px) {
+    font-size: 16px;
+  }
+}
+
+.highscore {
+  background-color: #666;
+  color: white !important;
+  padding: 5px 0;
+  border-radius: 5px;
+
+  .hs-item {
+    border-right: 1px white solid;
+  }
+
+  .time {
+    border-right: none;
+  }
 }

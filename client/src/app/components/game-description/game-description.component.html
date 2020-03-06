@@ -20,33 +20,33 @@
         <h3 class="title">Top Ten Scores</h3>
       </div>
     </div>
-    <div class="level mt-1">
-      <div class="level-item">
-        <h3 class="subtitle">Rank</h3>
+    <div class="highscore-title">
+      <div class="hs-item">
+        <h3 class="hs-title">Rank</h3>
       </div>
-      <div class="level-item">
-        <h3 class="subtitle">Username</h3>
+      <div class="hs-item">
+        <h3 class="hs-title">Username</h3>
       </div>
-      <div class="level-item">
-        <h3 class="subtitle">Percent Correct</h3>
+      <div class="hs-item">
+        <h3 class="hs-title">Grade</h3>
       </div>
-      <div class="level-item">
-        <h3 class="subtitle">Time Left</h3>
+      <div class="hs-item time">
+        <h3 class="hs-title">Time Left</h3>
       </div>
     </div>
 
-    <div *ngFor='let highscore of highScoreArray; let i = index' class='level'>
-      <div class="level-item">
-        <h3 class="subtitle">{{i + 1}}</h3>
+    <div *ngFor='let highscore of highScoreArray; let i = index' class='highscore'>
+      <div class="hs-item rank">
+        <h3 class="hs-text">{{i + 1}}</h3>
       </div>
-      <div class="level-item">
-        <h3 class="subtitle">{{highscore.user_id.username}}</h3>
+      <div class="hs-item username">
+        <h3 class="hs-text">{{highscore.user_id.username}}</h3>
       </div>
-      <div class="level-item">
-        <h3 class="subtitle">{{highscore.score}}%</h3>
+      <div class="hs-item score">
+        <h3 class="hs-text">{{highscore.score}}%</h3>
       </div>
-      <div class="level-item">
-        <h3 class="subtitle">{{highscore.time_left}}</h3>
+      <div class="hs-item time">
+        <h3 class="hs-text">{{highscore.time_left}}</h3>
       </div>
     </div>
   </div>
