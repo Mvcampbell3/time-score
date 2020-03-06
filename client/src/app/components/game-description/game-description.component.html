@@ -1,46 +1,55 @@
-<div class="hero is-info">
-  <div class="hero-body has-text-centered">
-    <h3 class="title">{{gameTitle}}</h3>
-    <p class="content">{{gameDescription}}</p>
-    <p class="content">{{gameInstructions}}</p>
-    <div class="button-holder">
-      <a class='button is-success' [routerLink]="['/game', gameId]">Play</a>
-      <button class="button is-danger" (click)='backToList()'>Back</button>
+<div class="desc-container">
+
+  <div class="left-side">
+    <div class="splash">
+      <div class="splash-body has-text-centered">
+        <h3 class="title">{{gameTitle}}</h3>
+        <p class="content">{{gameDescription}}</p>
+        <p class="content">{{gameInstructions}}</p>
+        <div class="button-holder">
+          <a class='button is-success' [routerLink]="['/game', gameId]">Play</a>
+          <button class="button is-danger" (click)='backToList()'>Back</button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="level mt-1">
-  <div class="level-item">
-    <h3 class="title">Highscores List</h3>
-  </div>
-</div>
-<div class="level mt-1">
-  <div class="level-item">
-    <h3 class="subtitle">Rank</h3>
-  </div>
-  <div class="level-item">
-    <h3 class="subtitle">Username</h3>
-  </div>
-  <div class="level-item">
-    <h3 class="subtitle">Percent Correct</h3>
-  </div>
-  <div class="level-item">
-    <h3 class="subtitle">Time Left</h3>
-  </div>
-</div>
+  <div class="right-side">
+    <div class="level mt-1">
+      <div class="level-item">
+        <h3 class="title">Top Ten Scores</h3>
+      </div>
+    </div>
+    <div class="level mt-1">
+      <div class="level-item">
+        <h3 class="subtitle">Rank</h3>
+      </div>
+      <div class="level-item">
+        <h3 class="subtitle">Username</h3>
+      </div>
+      <div class="level-item">
+        <h3 class="subtitle">Percent Correct</h3>
+      </div>
+      <div class="level-item">
+        <h3 class="subtitle">Time Left</h3>
+      </div>
+    </div>
 
-<div *ngFor='let highscore of highScoreArray; let i = index' class='level'>
-  <div class="level-item">
-    <h3 class="subtitle">{{i + 1}}</h3>
+    <div *ngFor='let highscore of highScoreArray; let i = index' class='level'>
+      <div class="level-item">
+        <h3 class="subtitle">{{i + 1}}</h3>
+      </div>
+      <div class="level-item">
+        <h3 class="subtitle">{{highscore.user_id.username}}</h3>
+      </div>
+      <div class="level-item">
+        <h3 class="subtitle">{{highscore.score}}%</h3>
+      </div>
+      <div class="level-item">
+        <h3 class="subtitle">{{highscore.time_left}}</h3>
+      </div>
+    </div>
   </div>
-  <div class="level-item">
-    <h3 class="subtitle">{{highscore.user_id.username}}</h3>
-  </div>
-  <div class="level-item">
-    <h3 class="subtitle">{{highscore.score}}%</h3>
-  </div>
-  <div class="level-item">
-    <h3 class="subtitle">{{highscore.time_left}}</h3>
-  </div>
+
+
 </div>

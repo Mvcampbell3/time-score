@@ -6,10 +6,23 @@
   column-gap: 0.5em;
 }
 
-.high-holder {
+// 3298DC
+
+.desc-container {
   display: grid;
-  grid-template-columns: 1fr;
-  width: 500px;
-  padding: 10px;
-  margin: 0 auto;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 52px);
+}
+
+.splash {
+  display: flex;
+  background-color: #3298dc;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+
+.splash h3.title {
+  color: white;
 }
