@@ -84,7 +84,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   }
 
   resetGame() {
-    this.time = 60;
+    this.time = 600;
     this.play = true;
     this.guess = '';
     clearInterval(this.timer)

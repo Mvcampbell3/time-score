@@ -1,10 +1,24 @@
-<p>{{gameTitle}}</p>
+<!-- <p>{{gameTitle}}</p>
 <p>{{gameId}}</p>
 <p>{{gameInstructions}}</p>
-<p>{{gameDescription}}</p>
+<p>{{gameDescription}}</p> -->
 
-<a [routerLink]="['/game', gameId]">Play</a>
-<button class="button is-danger is-inverted" (click)='backToList()'>Back</button>
+<div class="hero is-info">
+  <div class="hero-body has-text-centered">
+    <h3 class="title">{{gameTitle}}</h3>
+    <p class="content">{{gameDescription}}</p>
+    <p class="content">{{gameInstructions}}</p>
+    <div class="button-holder">
+      <a class='button is-success' [routerLink]="['/game', gameId]">Play</a>
+      <button class="button is-danger" (click)='backToList()'>Back</button>
+    </div>
+  </div>
+
+
+</div>
+
+
+
 
 <div *ngFor='let highscore of highScoreArray'>
   <p>{{highscore.user_id.username}} {{highscore.total_score}}</p>

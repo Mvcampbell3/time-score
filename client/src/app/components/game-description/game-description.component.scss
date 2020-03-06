@@ -1,0 +1,7 @@
+.button-holder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: fit-content;
+  margin: 0 auto;
+  column-gap: 0.5em;
+}
