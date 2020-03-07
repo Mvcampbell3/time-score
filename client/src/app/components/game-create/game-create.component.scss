@@ -1,0 +1,22 @@
+.instructions-drop.min {
+  transform: scale(0);
+  display: none;
+}
+
+.instructions-drop {
+  transform: scale(1);
+  line-height: 1.6;
+
+  @media (max-width: 800px) {
+    padding: 0px 20px;
+  }
+}
+
+.instructions-toggle {
+  width: fit-content;
+  margin: 0.25em auto;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+}

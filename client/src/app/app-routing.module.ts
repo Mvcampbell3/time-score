@@ -6,6 +6,7 @@ import { InstructionsComponent } from './components/instructions/instructions.co
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GamePageComponent } from './components/game-page/game-page.component';
+import { GameCreateComponent } from './components/game-create/game-create.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'instructions', component: InstructionsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'game/:id', component: GamePageComponent }
+  { path: 'game/:id', component: GamePageComponent },
+  { path: 'create', component: GameCreateComponent }
 ];
 
 @NgModule({

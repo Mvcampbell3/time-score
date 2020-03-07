@@ -14,6 +14,7 @@
     <div class="navbar-start">
       <a routerLink='gameslist' (click)='shutNavMobile()' class="navbar-item">List of Games</a>
       <a routerLink='instructions' (click)='shutNavMobile()' class="navbar-item">How to Play</a>
+      <a routerLink='create' (click)='shutNavMobile()' class="navbar-item">Create Game</a>
 
 
       <a *ngIf='loggedKnown; else loginRoute' routerLink='{{loggedInUser ? "profile":"login"}}'

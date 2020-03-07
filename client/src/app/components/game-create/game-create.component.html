@@ -1,0 +1,51 @@
+<div class="hero is-info is-bold has-text-centered">
+  <div class="hero-body">
+    <h3 class="title">Create Game</h3>
+    <p class="content">Have a list that you want to add to this website?</p>
+    <p class="subtitle">Make it</p>
+  </div>
+</div>
+
+
+
+<div [ngClass]='showInstructions ? "instructions-drop": "instructions-drop min"'>
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <p class="content">Making a new game is fairly simple, each one only needs a few things: A name, a description,
+          some instructions, and finally, a list of actual things to guess. Let's use a list of Major League
+          Baseball Teams as an example of a new game.
+        </p>
+        <p class='content'>
+          After the name and description, we have to come up with some
+          instructions. In this case, we probably don't want to include the city names of teams in the answers. It would
+          take too long to guess all of the teams! So in the instructions, lets put something like 'Only team names
+          count
+          towards correct answers, not the city names'.
+        </p>
+        <p class="content">
+          Next, we have to make a list of answers that the game will contain. Each answer has two parts: a
+          display-answer,
+          and an acceptable-answers list. Let's take a look at the St. Louis Cardinals. We have already established that
+          we are not looking at the city name in the instructions. The display-answer is what the player will see when
+          they answer correctly, or the game ends. In this case, the display-answer is going to be 'St. Louis
+          Cardinals'.
+        </p>
+        <p>
+          The acceptable-answers list contains up to three different answers that the game will look for as correct. For
+          the St. Louis Cardinals, we might want to have an acceptable-answers list the looks something like this:
+          cardinals, cards, red birds. If a player types in any of those during the game, it would count the St. Louis
+          Cardinals as having been answered correctly. Don't worry about capitalization, we make everything lowercase
+          behind the scenes. Do worry about spelling and punctuation. You can even take pity on players and include
+          common
+          spelling mistakes in the accepted-answers list if you want. It's totally up to you!
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="instructions-toggle" (click)='toggleShowInstructions()'>{{showInstructions ? "Close": "Show Instructions"}}
+</div>
