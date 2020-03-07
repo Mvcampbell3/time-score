@@ -93,7 +93,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       )
     } else {
-      console.log('login not valid, would not send request')
+      console.log('login not valid, would not send request');
+      this.populateModal('Unsuccessful Login', 'Uh Oh!', ['Not all of the login requriements are met', 'Please try again'])
+      this.showModal();
     }
   }
 
