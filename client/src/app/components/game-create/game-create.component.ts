@@ -8,13 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class GameCreateComponent implements OnInit {
 
   showInstructions: boolean = false;
+  newAnswersList: { display_value: string, accepted_values: string[] }[] = [{ display_value: "Big Mac", accepted_values: ['Big Mac', 'bigmac'] }];
 
   constructor() { }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //   this.toggleShowInstructions()
-    // }, 1000)
+
   }
 
 
