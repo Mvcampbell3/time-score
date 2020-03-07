@@ -28,6 +28,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
   ongoing: boolean = false;
   gameId: string = '';
   loading: boolean;
+  user: boolean;
 
   loadingSub: Subscription = this.http.loading.subscribe(
     (data: boolean) => {
@@ -35,11 +36,22 @@ export class GamePageComponent implements OnInit, OnDestroy {
     }
   );
 
+  userSub: Subscription = this.userService.user.subscribe(
+    (data: boolean) => {
+      console.log('userSub on gamePage', data)
+      this.user = data;
+    },
+    (err: any) => {
+      this.user = false;
+      console.log(err)
+    }
+  )
+
   constructor(
     public http: HttpService,
     private route: ActivatedRoute,
     private router: Router,
-    public user: UserService
+    public userService: UserService
   ) { }
 
   ngOnInit() {
@@ -51,6 +63,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.loadingSub.unsubscribe();
+    this.userSub.unsubscribe();
     this.game = null;
     this.resetGame()
   }
@@ -106,7 +119,6 @@ export class GamePageComponent implements OnInit, OnDestroy {
 
   evaluateInput() {
     const answerArr: Answer[] = this.game.answers.filter(answer => answer.guessed === false);
-    // console.log(answerArr)
     let wasRight: boolean = false;
     answerArr.forEach((item: Answer) => {
       const rightTeam: boolean = item.checkAnswer(this.guess.trim().toLowerCase());
@@ -118,7 +130,7 @@ export class GamePageComponent implements OnInit, OnDestroy {
       this.clearInput();
       // run check to see if there are any answers that have guessed = false;
       if (this.game.answers.filter(answer => answer.guessed === false).length === 0) {
-        // This is end of the game as well
+        // This is end of the game
         this.gameOver();
       }
     }
@@ -139,12 +151,10 @@ export class GamePageComponent implements OnInit, OnDestroy {
     const timeScore = this.time / 10;
     console.log(timeScore)
     this.play = false;
-    // Run User Check
-    // if User run highscore create
-    console.log(this.user.userInfo)
-    if (this.user.userInfo.id) {
-      console.log(this.user.userInfo.id)
-      this.createHighScore(percentScore, timeScore, this.user.userInfo.id);
+
+    if (this.user) {
+      console.log(this.userService.userInfo.id)
+      this.createHighScore(percentScore, timeScore, this.userService.userInfo.id);
     } else {
       this.endGameModal.nativeElement.classList.add('is-active')
     }
