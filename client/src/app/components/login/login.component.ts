@@ -150,6 +150,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
     } else {
       console.log('sign up not valid, would not send request')
+      // Need to display to user
+      this.populateModal('Unsuccessful Sign Up', 'Uh Oh!', ['Not all of the sign up requirements are met', 'Please try again']);
+      this.showModal();
     }
   }
 
