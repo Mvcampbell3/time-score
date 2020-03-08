@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-game-create',
@@ -18,6 +20,7 @@ export class GameCreateComponent implements OnInit {
   nameInput: string = "";
   instructionsInput: string = "";
   descriptionInput: string = "";
+  placeholderInput: string = "";
 
   topSaved: boolean = false;
   middleSaved: boolean = false;
@@ -27,7 +30,7 @@ export class GameCreateComponent implements OnInit {
   showMid: boolean = false;
   showEdit: boolean = false;
 
-  constructor() { }
+  constructor(public userService: UserService, public http: HttpService) { }
 
   ngOnInit() {
 
@@ -38,7 +41,6 @@ export class GameCreateComponent implements OnInit {
   }
 
   addAnswer() {
-    console.log('clicked')
     console.log(this.displayInput, this.accepted1, this.accepted2, this.accepted3)
     if (this.displayInput !== "") {
       if (this.accepted1 !== "" || this.accepted2 !== "" || this.accepted3 !== "") {
@@ -100,6 +102,25 @@ export class GameCreateComponent implements OnInit {
   controlDelete(index: number) {
     console.log(index, ' delete')
     this.newAnswersList.splice(index, 1)
+  }
+
+  sendGame() {
+    const newGame = {
+      name: this.nameInput,
+      description: this.descriptionInput,
+      instructions: this.instructionsInput,
+      answers: this.newAnswersList,
+      inputPlaceholder: this.placeholderInput,
+      creatorId: this.userService.userInfo.id
+    }
+    this.http.createGame(newGame).subscribe(
+      (data: any) => {
+        console.log(data)
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
   }
 
 }

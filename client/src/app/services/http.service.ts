@@ -78,4 +78,8 @@ export class HttpService {
     }
     return this._http.post('/api/highscore', sendObj)
   }
+
+  createGame(newGame) {
+    return this._http.post('/api/game', newGame, this.setAuthorization())
+  }
 }

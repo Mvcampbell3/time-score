@@ -69,6 +69,11 @@
         </div>
         <div class="field">
           <div class="control">
+            <input type="text" class="input" placeholder='New Game Input Placeholder...' [(ngModel)]='placeholderInput'>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
             <textarea cols="30" rows="5" class="textarea" placeholder='New Game Instructions...'
               [(ngModel)]='instructionsInput'></textarea>
           </div>
@@ -118,7 +123,7 @@
           <button class="button is-warning" (click)='backTop()'>Back to Game Information</button>
         </div>
         <div class="level-item">
-          <button class="button is-success" (click)='saveMid()'>Save Answers</button>
+          <button class="button is-success" (click)='sendGame()'>Save Answers</button>
         </div>
         <div class="level-item">
           <button class="button is-info" (click)='addAnswer()'>

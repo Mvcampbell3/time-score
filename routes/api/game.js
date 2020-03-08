@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const game_controller = require('../../controllers/game_controller');
+const checkAuth = require('../../middleware/checkAuth')
 
 router.route('/')
   .get(game_controller.getAllGames)
-  .post(game_controller.newGame)
+  .post(checkAuth, game_controller.newGame)
   .delete(game_controller.deleteAllGames)
 
 router.route('/id/:id')
