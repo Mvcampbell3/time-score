@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/co
 import { UserService } from '../../services/user.service';
 import { HttpService } from 'src/app/services/http.service';
 import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('navBurger', { static: true }) navBurger: ElementRef;
   @ViewChild('navMenu', { static: true }) navMenu: ElementRef;
 
-  constructor(public userService: UserService, public http: HttpService) { }
+  constructor(public userService: UserService, public http: HttpService, public router: Router) { }
 
   ngOnInit() {
     this.checkAuth()
@@ -67,6 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logoutUser() {
     this.userService.logOutUser()
+    this.router.navigate(['/']);
   }
 
 }

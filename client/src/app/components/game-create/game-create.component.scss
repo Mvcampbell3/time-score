@@ -1,5 +1,15 @@
 .create-game {
-  padding-bottom: 300px;
+  padding-top: 20px;
+  // background-color: #111;
+  min-height: calc(100vh - 52px);
+
+  .container .columns .column {
+    background-color: white;
+
+    // @media (max-width: 750px) {
+    //   padding: 0 5px;
+    // }
+  }
 }
 
 .instructions-drop.min {
@@ -18,11 +28,12 @@
 
 .instructions-toggle {
   width: fit-content;
-  margin: 0.25em auto;
+  margin: 0 auto;
   border-radius: 5px;
   padding: 10px;
   background-color: #333;
   color: white;
+  cursor: pointer;
 }
 
 .answer-head {

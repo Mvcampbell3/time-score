@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { HttpService } from 'src/app/services/http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-create',
   templateUrl: './game-create.component.html',
   styleUrls: ['./game-create.component.scss']
 })
-export class GameCreateComponent implements OnInit {
+export class GameCreateComponent implements OnInit, OnDestroy {
 
   showInstructions: boolean = false;
   newAnswersList: { display_value: string, accepted_values: string[] }[] = [];
@@ -30,10 +31,16 @@ export class GameCreateComponent implements OnInit {
   showMid: boolean = false;
   showEdit: boolean = false;
 
-  constructor(public userService: UserService, public http: HttpService) { }
+  constructor(public userService: UserService, public http: HttpService, public router: Router) { }
 
   ngOnInit() {
+    console.log(this.userService.userInfo)
+    if (!this.userService.userInfo) {
+      this.router.navigate(['/'])
+    }
+  }
 
+  ngOnDestroy() {
   }
 
   toggleShowInstructions() {
@@ -116,6 +123,8 @@ export class GameCreateComponent implements OnInit {
     this.http.createGame(newGame).subscribe(
       (data: any) => {
         console.log(data)
+        // Display success modal
+        // Re-route to games list page or profile?
       },
       (err: any) => {
         console.log(err)
