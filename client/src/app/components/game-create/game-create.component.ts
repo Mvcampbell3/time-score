@@ -19,6 +19,14 @@ export class GameCreateComponent implements OnInit {
   instructionsInput: string = "";
   descriptionInput: string = "";
 
+  topSaved: boolean = false;
+  middleSaved: boolean = false;
+  editPassed: boolean = false;
+
+  showTop: boolean = true;
+  showMid: boolean = false;
+  showEdit: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
@@ -51,6 +59,18 @@ export class GameCreateComponent implements OnInit {
     this.accepted1 = "";
     this.accepted2 = "";
     this.accepted3 = "";
+  }
+
+  saveTop() {
+    this.topSaved = true;
+    this.showTop = false;
+    this.showMid = true;
+  }
+
+  backTop() {
+    this.topSaved = false;
+    this.showTop = true;
+    this.showMid = false;
   }
 
 }

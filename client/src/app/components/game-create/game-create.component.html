@@ -55,29 +55,36 @@
   <!-- Step One -->
 
   <div class="container">
-    <div class="columns">
+    <div class="columns" *ngIf='showTop'>
       <div class="column is-half is-offset-one-quarter">
         <div class="field">
           <div class="control">
-            <input type="text" class="input" placeholder="New Game Name...">
+            <input type="text" class="input" placeholder="New Game Name..." [(ngModel)]='nameInput'>
           </div>
         </div>
         <div class="field">
           <div class="control">
-            <input type="text" class="input" placeholder='New Game Description...'>
+            <input type="text" class="input" placeholder='New Game Description...' [(ngModel)]='descriptionInput'>
           </div>
         </div>
         <div class="field">
           <div class="control">
-            <textarea cols="30" rows="5" class="textarea" placeholder='New Game Instructions...'></textarea>
+            <textarea cols="30" rows="5" class="textarea" placeholder='New Game Instructions...'
+              [(ngModel)]='instructionsInput'></textarea>
+          </div>
+        </div>
+        <div class="level">
+          <div class="level-item">
+            <button class="button is-success" (click)='saveTop()'>Save Game Information</button>
           </div>
         </div>
       </div>
+
     </div>
 
     <!-- Step Two -->
 
-    <div class="answer-input">
+    <div class="answer-input" *ngIf='showMid'>
       <div class="columns is-vcentered">
         <div class="column is-half is-offset-one-quarter">
           <div class="field">
@@ -102,15 +109,26 @@
           </div>
         </div>
         <div class="column">
+
+        </div>
+
+      </div>
+      <div class="level">
+        <div class="level-item">
+          <button class="button is-warning" (click)='backTop()'>Back to Game Information</button>
+        </div>
+        <div class="level-item">
+          <button class="button is-success" (click)='saveMid()'>Save Answers</button>
+        </div>
+        <div class="level-item">
           <button class="button is-info" (click)='addAnswer()'>
             <i class="fas fa-plus"></i>
           </button>
         </div>
       </div>
-
     </div>
 
-    <div class="answer-holder">
+    <div class="answer-holder" *ngIf='showMid'>
       <div class="answer-head">
         <div class="answer-title">Display-Answer</div>
         <div class="answer-title">Acceptable-Answers</div>
