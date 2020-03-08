@@ -21,7 +21,8 @@ mongoose
   .connect(process.env.MONGODB_URL || 'mongodb://localhost/timescore', {
     useFindAndModify: false,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
   })
   .then(() => {
     console.log('mongoose connected');
