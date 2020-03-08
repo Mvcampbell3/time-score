@@ -73,4 +73,33 @@ export class GameCreateComponent implements OnInit {
     this.showMid = false;
   }
 
+  controlMove(up: boolean, index: number) {
+    console.log(up, index);
+    if (up && index > 0) {
+      console.log('would move up')
+      const tempAnswer = this.newAnswersList[index - 1];
+      this.newAnswersList[index - 1] = this.newAnswersList[index];
+      this.newAnswersList[index] = tempAnswer;
+    } else if (!up && index < this.newAnswersList.length - 1) {
+      console.log('would move down')
+      const tempAnswer = this.newAnswersList[index + 1];
+      this.newAnswersList[index + 1] = this.newAnswersList[index];
+      this.newAnswersList[index] = tempAnswer;
+    }
+  }
+
+  controlEdit(index: number) {
+    const holderAnswer = this.newAnswersList[index];
+    this.displayInput = holderAnswer.display_value;
+    this.accepted1 = holderAnswer.accepted_values[0] || "";
+    this.accepted2 = holderAnswer.accepted_values[1] || "";
+    this.accepted3 = holderAnswer.accepted_values[2] || "";
+    this.newAnswersList.splice(index, 1);
+  }
+
+  controlDelete(index: number) {
+    console.log(index, ' delete')
+    this.newAnswersList.splice(index, 1)
+  }
+
 }

@@ -141,6 +141,20 @@
             {{accepted}}
           </div>
         </div>
+        <div class="answer-item control-buttons">
+          <button class="button is-info is-small" (click)='controlMove(true, i)'>
+            <i class="fas fa-angle-up"></i>
+          </button>
+          <button class="button is-info is-small" (click)='controlMove(false, i)'>
+            <i class="fas fa-angle-down"></i>
+          </button>
+          <button class="button is-success is-small" (click)='controlEdit(i)'>
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="button is-danger is-small" (click)='controlDelete(i)'>
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
       </div>
     </div>
 
