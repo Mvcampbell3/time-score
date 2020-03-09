@@ -63,8 +63,8 @@ export class GameCreateComponent implements OnInit, OnDestroy {
 
   addAnswer() {
     console.log(this.displayInput, this.accepted1, this.accepted2, this.accepted3)
-    if (this.displayInput !== "") {
-      if (this.accepted1 !== "" || this.accepted2 !== "" || this.accepted3 !== "") {
+    if (this.displayInput.trim() !== "") {
+      if (this.accepted1.trim() !== "" || this.accepted2.trim() !== "" || this.accepted3.trim() !== "") {
         const newAnswer = { display_value: "", accepted_values: [] };
         newAnswer.display_value = this.displayInput;
         const acceptables = [this.accepted1, this.accepted2, this.accepted3];
@@ -73,8 +73,18 @@ export class GameCreateComponent implements OnInit, OnDestroy {
         console.log(newAnswer)
         this.newAnswersList.push(newAnswer)
         this.clearAnswer()
+      } else {
+        this.missingAnswerInfo()
       }
+    } else {
+      this.missingAnswerInfo()
     }
+  }
+
+  missingAnswerInfo() {
+    this.populateModal('Missing Information', 'Not enough information for an answer was given, make sure to have a display answer and at least one acceptable answer!')
+    this.createModal.nativeElement.classList.add('is-active');
+    this.clearAnswer()
   }
 
   clearAnswer() {
@@ -160,8 +170,6 @@ export class GameCreateComponent implements OnInit, OnDestroy {
 
   closeModal() {
     this.createModal.nativeElement.classList.remove('is-active');
-    this.showTop = true;
-    this.showMid = false;
     this.messageContent = '';
     this.messageTitle = '';
     if (this.success) {
