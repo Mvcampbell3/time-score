@@ -1,4 +1,13 @@
 <div class="create-game">
+  <div class="modal" #createModal>
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="card">
+        This is the create game modal
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)='closeModal()'></button>
+  </div>
   <div class="container smallPad">
 
     <div [ngClass]='showInstructions ? "instructions-drop": "instructions-drop min"'>
@@ -36,7 +45,7 @@
     <!-- </div> -->
     <div class="columns">
       <div class="column is-half is-offset-one-quarter">
-        <div class="instructions-toggle mb-2" (click)='toggleShowInstructions()'>
+        <div class="instructions-toggle mb-2" (click)='toggleShowInstructions(this.showInstructions ? false:true)'>
           {{showInstructions ? "Close": "Show Instructions"}}
         </div>
       </div>

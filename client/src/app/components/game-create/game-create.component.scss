@@ -1,14 +1,9 @@
 .create-game {
   padding-top: 20px;
-  // background-color: #111;
   min-height: calc(100vh - 52px);
 
   .container .columns .column {
     background-color: white;
-
-    // @media (max-width: 750px) {
-    //   padding: 0 5px;
-    // }
   }
 }
 
@@ -46,7 +41,7 @@
 
 .answer,
 .answer-head {
-  grid-template-columns: auto auto 150px;
+  grid-template-columns: 1fr 1fr 150px;
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
@@ -61,7 +56,7 @@
   align-items: center;
   text-align: center;
   margin: 0.5em 0;
-  background-color: rgb(27, 43, 44);
+  background-color: #333;
   color: white;
   padding: 5px;
   border-radius: 5px;
@@ -71,7 +66,7 @@
     .answer-accepted {
       margin: 0 0.25em;
       background-color: white;
-      padding: 5px;
+      padding: 5px 7px;
       border-radius: 5px;
       color: black;
     }

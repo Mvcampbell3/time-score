@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { HttpService } from 'src/app/services/http.service';
 import { Router } from '@angular/router';
@@ -9,11 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./game-create.component.scss']
 })
 export class GameCreateComponent implements OnInit, OnDestroy {
+  @ViewChild('createModal', { static: false }) createModal: ElementRef;
 
   showInstructions: boolean = false;
-  newAnswersList: { display_value: string, accepted_values: string[] }[] = [
-    { display_value: 'McDonald\'s', accepted_values: ['mcdonalds', 'mcdonald\'s'] }
-  ];
+  newAnswersList: { display_value: string, accepted_values: string[] }[] = [];
 
   displayInput: string = "";
   accepted1: string = "";
@@ -29,8 +28,8 @@ export class GameCreateComponent implements OnInit, OnDestroy {
   middleSaved: boolean = false;
   editPassed: boolean = false;
 
-  showTop: boolean = false;
-  showMid: boolean = true;
+  showTop: boolean = true;
+  showMid: boolean = false;
   showEdit: boolean = false;
 
   constructor(public userService: UserService, public http: HttpService, public router: Router) { }
@@ -45,8 +44,17 @@ export class GameCreateComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  toggleShowInstructions() {
-    this.showInstructions = !this.showInstructions
+  toggleShowInstructions(open) {
+    if (open) {
+      this.showInstructions = true;
+      this.showTop = false;
+      this.showMid = false;
+    } else {
+      this.showInstructions = false;
+      this.showTop = true;
+      this.showMid = false;
+    }
+
   }
 
   addAnswer() {
@@ -126,12 +134,29 @@ export class GameCreateComponent implements OnInit, OnDestroy {
       (data: any) => {
         console.log(data)
         // Display success modal
+        this.createModal.nativeElement.classList.add('is-active')
         // Re-route to games list page or profile?
       },
       (err: any) => {
         console.log(err)
       }
     )
+  }
+
+  closeModal() {
+    this.createModal.nativeElement.classList.remove('is-active');
+    this.clearInputs()
+    this.showTop = true;
+    this.showMid = false;
+  }
+
+  clearInputs() {
+    this.nameInput = "";
+    this.placeholderInput = "";
+    this.instructionsInput = "";
+    this.descriptionInput = "";
+    this.newAnswersList = [];
+    this.clearAnswer()
   }
 
 }
