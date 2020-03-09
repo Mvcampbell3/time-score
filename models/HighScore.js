@@ -44,22 +44,21 @@ HighScoreSchema.pre('save', function(next) {
     })
 })
 
-HighScoreSchema.pre('findOneAndDelete', function(next) {
+HighScoreSchema.pre('remove', function(next) {
   const User = require('./User');
-
-  console.log('pre remove schema middleware ran')
-  User.findOneAndUpdate({ "highScoreArray": this._conditions._id }, { $pull: { 'highScoreArray': this._conditions._id } })
+  console.log('highscore pre remove');
+  User.findOneAndUpdate({ "highScoreArray": { $in: this._id } }, { $pull: { 'highScoreArray': this._id } })
     .then(result => {
-      console.log('pulled highscore from user highScores array')
+      console.log(result);
       next()
-
     })
     .catch(err => {
-      console.log(err)
-      next()
-
+      console.log(err);
+      next(err)
     })
-
 })
 
+
+
 module.exports = HighScore = mongoose.model('HighScore', HighScoreSchema);
+

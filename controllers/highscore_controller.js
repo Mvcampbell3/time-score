@@ -52,7 +52,7 @@ module.exports = {
   },
 
   deleteHighscore: (req, res) => {
-    db.HighScore.findOneAndDelete({ _id: req.params.id })
+    db.HighScore.remove({ _id: req.params.id })
       .then(results => {
         res.json(results)
       })

@@ -35,9 +35,22 @@ module.exports = {
   },
 
   deleteOneGame: (req, res) => {
-    db.Game.findByIdAndDelete(req.params.id)
-      .then(delGame => res.json(delGame))
-      .catch(err => res.json(err))
+    db.Game.findById(req.params.id)
+      .then(game => {
+        game.remove()
+          .then(results => {
+            console.log(results);
+            res.json(results)
+          })
+          .catch(err => {
+            console.log(err);
+            res.json(err)
+          })
+      })
+      .catch(err => {
+        console.log(err);
+        res.json(err)
+      })
   }
 
 }

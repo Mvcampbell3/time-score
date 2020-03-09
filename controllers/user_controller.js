@@ -7,7 +7,7 @@ module.exports = {
   getAllUsers: (req, res) => {
     db.User.find()
       .then(users => {
-        console.log(users);
+        // console.log(users);
         res.json(users);
       })
       .catch(err => {

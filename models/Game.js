@@ -45,4 +45,30 @@ const GameSchema = new Schema({
   }
 })
 
+GameSchema.pre('remove', function(next) {
+  const HighScore = require('./HighScore');
+  console.log('games pre remove')
+  HighScore.find({ game_id: this._id })
+    .then(highscores => {
+      console.log(highscores);
+      let promiseArr = [];
+      highscores.forEach(one => {
+        promiseArr.push(one.remove())
+      })
+      Promise.all(promiseArr)
+        .then(results => {
+          console.log(results)
+          next();
+        })
+        .catch(err => {
+          console.log(err);
+          next(err)
+        })
+    })
+    .catch(err => {
+      console.log(err);
+      next(err)
+    })
+})
+
 module.exports = Game = mongoose.model('Game', GameSchema)
