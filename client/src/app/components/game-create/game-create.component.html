@@ -3,7 +3,19 @@
     <div class="modal-background"></div>
     <div class="modal-content">
       <div class="card">
-        This is the create game modal
+        <div class="card-header">
+          <p class="card-header-title">{{messageTitle}}</p>
+        </div>
+        <div class="card-content">
+          <div class="content">
+            {{messageContent}}
+          </div>
+        </div>
+        <div class="card-footer">
+          <a routerLink='/gameslist' class='card-footer-item'>Games List</a>
+          <a routerLink='/profile' class='card-footer-item'>Profile Page</a>
+          <div class='card-footer-item has-text-link pointer' (click)='closeModal()'>Close</div>
+        </div>
       </div>
     </div>
     <button class="modal-close is-large" aria-label="close" (click)='closeModal()'></button>

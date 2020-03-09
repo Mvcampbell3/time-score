@@ -32,6 +32,10 @@ export class GameCreateComponent implements OnInit, OnDestroy {
   showMid: boolean = false;
   showEdit: boolean = false;
 
+  messageTitle: string = "";
+  messageContent: string = "";
+  success: boolean = false;
+
   constructor(public userService: UserService, public http: HttpService, public router: Router) { }
 
   ngOnInit() {
@@ -122,32 +126,47 @@ export class GameCreateComponent implements OnInit, OnDestroy {
   }
 
   sendGame() {
-    const newGame = {
-      name: this.nameInput,
-      description: this.descriptionInput,
-      instructions: this.instructionsInput,
-      answers: this.newAnswersList,
-      inputPlaceholder: this.placeholderInput,
-      creatorId: this.userService.userInfo.id
-    }
-    this.http.createGame(newGame).subscribe(
-      (data: any) => {
-        console.log(data)
-        // Display success modal
-        this.createModal.nativeElement.classList.add('is-active')
-        // Re-route to games list page or profile?
-      },
-      (err: any) => {
-        console.log(err)
+    if (this.verifyValues()) {
+
+      const newGame = {
+        name: this.nameInput,
+        description: this.descriptionInput,
+        instructions: this.instructionsInput,
+        answers: this.newAnswersList,
+        inputPlaceholder: this.placeholderInput,
+        creatorId: this.userService.userInfo.id
       }
-    )
+      this.http.createGame(newGame).subscribe(
+        (data: any) => {
+          console.log(data)
+          // Display success modal
+          this.success = true;
+          this.populateModal('Successful Game Creation', 'The game was added to the database, thank you for taking the time to make it. If there is something you want to change on the game, you can edit it at your profile page. ')
+          this.createModal.nativeElement.classList.add('is-active')
+          // Re-route to games list page or profile?
+        },
+        (err: any) => {
+          console.log(err)
+          this.populateModal('Unsuccessful Game Creation', 'Something went wrong with the game creation, please try again!')
+          this.createModal.nativeElement.classList.add('is-active')
+        }
+      )
+    } else {
+      this.populateModal('Missing Information', 'There is some information about the game that is missing, please enter values for all inputs and have at least one answer saved!')
+      this.createModal.nativeElement.classList.add('is-active')
+    }
+
   }
 
   closeModal() {
     this.createModal.nativeElement.classList.remove('is-active');
-    this.clearInputs()
     this.showTop = true;
     this.showMid = false;
+    this.messageContent = '';
+    this.messageTitle = '';
+    if (this.success) {
+      this.clearInputs();
+    }
   }
 
   clearInputs() {
@@ -157,6 +176,25 @@ export class GameCreateComponent implements OnInit, OnDestroy {
     this.descriptionInput = "";
     this.newAnswersList = [];
     this.clearAnswer()
+    this.success = false;
+  }
+
+  populateModal(title: string, content: string) {
+    this.messageTitle = title;
+    this.messageContent = content;
+  }
+
+  verifyValues(): boolean {
+    if (
+      this.nameInput !== "" &&
+      this.instructionsInput !== "" &&
+      this.descriptionInput !== "" &&
+      this.placeholderInput !== "" &&
+      this.newAnswersList.length > 0
+    ) {
+      return true
+    }
+    return false;
   }
 
 }
