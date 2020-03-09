@@ -10,6 +10,8 @@ router.route('/')
 
 router.post('/login', user_controller.loginUser);
 
-router.get('/checkAuth', checkAuth, user_controller.checkToken)
+router.get('/checkAuth', checkAuth, user_controller.checkToken);
+
+router.get('/profile', checkAuth, user_controller.userProfile);
 
 module.exports = router;

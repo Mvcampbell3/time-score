@@ -84,5 +84,21 @@ module.exports = {
     } else {
       res.json({ savedTokenValid: false })
     }
+  },
+
+  userProfile: (req, res) => {
+    // Games created by Player
+    // User Info minus the password
+    // Highscores Player has populated
+    let promiseArr = [db.Game.find({ creatorId: req.user.id }), db.User.findById(req.user.id).select('-password'.populate('highScoresArray'))];
+    Promise.all(promiseArr)
+      .then(result => {
+        console.log(result);
+        res.json(result)
+      })
+      .catch(err => {
+        console.log(err)
+        res.json(err)
+      })
   }
 };
