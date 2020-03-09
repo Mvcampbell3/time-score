@@ -28,13 +28,19 @@ export class ProfileComponent implements OnInit {
   )
 
   ngOnInit() {
-    this.grabUserHighScores()
+    this.getUserProfile()
   }
 
   // In case reloading onto this page, recursive user check
-  grabUserHighScores() {
-    console.log('running grab user highscores')
-
+  getUserProfile() {
+    this.http.userProfile().subscribe(
+      (data: any) => {
+        console.log(data);
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
   }
 
 }

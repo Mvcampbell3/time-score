@@ -82,4 +82,8 @@ export class HttpService {
   createGame(newGame) {
     return this._http.post('/api/game', newGame, this.setAuthorization())
   }
+
+  userProfile() {
+    return this._http.get('/api/user/profile', this.setAuthorization())
+  }
 }

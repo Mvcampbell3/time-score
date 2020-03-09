@@ -19,11 +19,10 @@ const UserSchema = new Schema({
     required: true
   },
 
-  highScoreArray: {
-    type: [Schema.Types.ObjectId],
+  highScoreArray: [{
+    type: Schema.Types.ObjectId,
     ref: 'HighScore',
-    default: []
-  }
+  }]
 })
 
 module.exports = User = mongoose.model('User', UserSchema);
