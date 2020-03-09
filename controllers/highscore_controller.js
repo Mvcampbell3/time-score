@@ -30,10 +30,14 @@ module.exports = {
   // Uses checkAuth middleware for userid
   // Do we want to use checkAuth, or can anyone see a user's highscores?
   getUserHighScores: (req, res) => {
+    console.log('get user highscores')
     db.HighScore.find({ user_id: req.user.id })
       .populate({ path: "game_id", select: "name" })
       .populate({ path: "user_id", select: "username" })
-      .then(userHighscores => res.json(userHighscores))
+      .then(userHighscores => {
+        console.log(userHighscores)
+        res.json(userHighscores)
+      })
       .catch(err => res.json(err));
   },
 
