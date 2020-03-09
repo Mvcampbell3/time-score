@@ -11,7 +11,9 @@ import { Router } from '@angular/router';
 export class GameCreateComponent implements OnInit, OnDestroy {
 
   showInstructions: boolean = false;
-  newAnswersList: { display_value: string, accepted_values: string[] }[] = [];
+  newAnswersList: { display_value: string, accepted_values: string[] }[] = [
+    { display_value: 'McDonald\'s', accepted_values: ['mcdonalds', 'mcdonald\'s'] }
+  ];
 
   displayInput: string = "";
   accepted1: string = "";
@@ -27,8 +29,8 @@ export class GameCreateComponent implements OnInit, OnDestroy {
   middleSaved: boolean = false;
   editPassed: boolean = false;
 
-  showTop: boolean = true;
-  showMid: boolean = false;
+  showTop: boolean = false;
+  showMid: boolean = true;
   showEdit: boolean = false;
 
   constructor(public userService: UserService, public http: HttpService, public router: Router) { }

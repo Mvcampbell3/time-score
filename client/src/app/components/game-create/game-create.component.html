@@ -70,7 +70,7 @@
         </div>
         <div class="level">
           <div class="level-item">
-            <button class="button is-success" (click)='saveTop()'>Save Game Information</button>
+            <button class="button is-success" (click)='saveTop()'>Game Answers</button>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@
     <!-- Step Two -->
 
     <div class="answer-input" *ngIf='showMid'>
-      <div class="columns is-vcentered">
+      <div class="columns">
         <div class="column is-half is-offset-one-quarter">
           <div class="field">
             <div class="control">
@@ -102,32 +102,31 @@
               <input type="text" class="input" placeholder="Acceptable Answer 3" [(ngModel)]='accepted3'>
             </div>
           </div>
+          <div class="field flex-space">
+            <button class="button is-primary" (click)='backTop()'>Game Information</button>
+            <button class="button is-info" (click)='addAnswer()'>
+              <i class="fas fa-plus"></i>
+            </button>
+            <button class="button is-success" (click)='sendGame()'>Finish Game</button>
+
+          </div>
+
         </div>
+
       </div>
-      <div class="level">
-        <div class="level-item">
-          <button class="button is-warning" (click)='backTop()'>Back to Game Information</button>
-        </div>
-        <div class="level-item">
-          <button class="button is-success" (click)='sendGame()'>Save Answers</button>
-        </div>
-        <div class="level-item">
-          <button class="button is-info" (click)='addAnswer()'>
-            <i class="fas fa-plus"></i>
-          </button>
-        </div>
-      </div>
+
     </div>
 
     <div class="answer-holder" *ngIf='showMid'>
       <div class="answer-head">
         <div class="answer-title">Display-Answer</div>
         <div class="answer-title">Acceptable-Answers</div>
+        <div class="answer-title">Controls</div>
       </div>
 
       <div class="answer" *ngFor='let answer of newAnswersList; let i = index'>
         <div class="answer-item">{{answer.display_value}}</div>
-        <div class="answer-item">
+        <div class="answer-accepted-holder">
           <div class="answer-accepted" *ngFor='let accepted of answer.accepted_values'>
             {{accepted}}
           </div>
