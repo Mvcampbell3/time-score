@@ -15,6 +15,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GameDescriptionComponent } from './components/game-description/game-description.component';
 import { GameCreateComponent } from './components/game-create/game-create.component';
+import { GameEditComponent } from './components/game-edit/game-edit.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { GameCreateComponent } from './components/game-create/game-create.compon
     LoaderComponent,
     ProfileComponent,
     GameDescriptionComponent,
-    GameCreateComponent
+    GameCreateComponent,
+    GameEditComponent
   ],
   imports: [
     BrowserModule,
