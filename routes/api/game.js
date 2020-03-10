@@ -11,4 +11,7 @@ router.route('/id/:id')
   .get(game_controller.getOneGame)
   .delete(checkAuth, game_controller.deleteOneGame)
 
+router.route('edit/:id')
+  .get(checkAuth, game_controller.getEditInfo)
+
 module.exports = router;
