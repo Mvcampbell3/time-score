@@ -75,15 +75,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
     // method as in edit or delete
     // id of item being worked on
     this.itemId = id;
+    this.itemType = type;
+    this.op = method;
     if (type === 'game') {
       // If Game
-      this.itemType = "game";
       if (method === 'edit') {
         // display warning message, asking if they are sure they want to edit game
         this.warningMessage = 'Are you sure you want to edit the following game';
         this.warningItem = name;
         this.deleteClicked = false;
-        this.op = "edit";
 
       } else {
         // display warning message, asking if they are sure they want to delete game
@@ -91,7 +91,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.warningMessage = 'Are you sure you want to delete the following game';
         this.warningItem = name;
         this.deleteClicked = true;
-        this.op = "delete"
       }
     } else {
       // only will be able to delete highscore
@@ -99,8 +98,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.warningMessage = 'Are you sure you want to delete a high score for the following game';
       this.warningItem = name;
       this.deleteClicked = true;
-      this.op = "delete";
-      this.itemType = "highscore"
     }
     this.warningModal.nativeElement.classList.add('is-active')
   }
