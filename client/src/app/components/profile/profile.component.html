@@ -18,6 +18,10 @@
           </div>
           <div class="card-footer">
             <div class='card-footer-item has-text-link pointer' (click)='closeModal()'>Cancel</div>
+            <div
+              [ngClass]='deleteClicked ? "card-footer-item has-text-danger pointer":"card-footer-item has-text-success pointer"'
+              (click)='executeMethod()'>
+              {{deleteClicked ? "Delete":"Edit"}}</div>
           </div>
         </div>
       </div>

@@ -23,6 +23,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
   confirmClick: boolean = false;
   warningMessage: string = "";
   warningItem: string = "";
+  deleteClicked: boolean = false;
+
+  itemId: string = "";
+  op: string = "";
+  itemType: string = "";
 
   constructor(public http: HttpService, public userService: UserService, public router: Router) { }
 
@@ -69,29 +74,58 @@ export class ProfileComponent implements OnInit, OnDestroy {
     // Type as in Game or HighScore
     // method as in edit or delete
     // id of item being worked on
+    this.itemId = id;
     if (type === 'game') {
       // If Game
+      this.itemType = "game";
       if (method === 'edit') {
         // display warning message, asking if they are sure they want to edit game
         this.warningMessage = 'Are you sure you want to edit the following game';
         this.warningItem = name;
+        this.deleteClicked = false;
+        this.op = "edit";
 
       } else {
         // display warning message, asking if they are sure they want to delete game
         // deleting a game also deletes all highscores associated with the game
         this.warningMessage = 'Are you sure you want to delete the following game';
         this.warningItem = name;
+        this.deleteClicked = true;
+        this.op = "delete"
       }
     } else {
       // only will be able to delete highscore
       // display warning message, asking if they are sure they want to delete highscore
       this.warningMessage = 'Are you sure you want to delete a high score for the following game';
       this.warningItem = name;
+      this.deleteClicked = true;
+      this.op = "delete";
+      this.itemType = "highscore"
     }
     this.warningModal.nativeElement.classList.add('is-active')
   }
 
   closeModal() {
     this.warningModal.nativeElement.classList.remove('is-active');
+    this.deleteClicked = false;
+    this.itemId = "";
+    this.op = "";
+    this.itemType = "";
+  }
+
+  executeMethod() {
+    console.log(`would execute ${this.op} on item with id of ${this.itemId}`)
+  }
+
+  deleteHighscore(id) {
+
+  }
+
+  deleteGame(id) {
+
+  }
+
+  editGame(id) {
+
   }
 }
