@@ -57,6 +57,17 @@ module.exports = {
         console.log(err);
         res.json(err)
       })
-  }
+  },
 
+  getEditInfo: (req, res) => {
+    db.Game.findById(req.params.id)
+      .then(game => {
+        if (game.creatorId.toString() === req.user.id) {
+          res.json(game);
+        } else {
+          res.status(401).json({ msg: 'Authorized' })
+        }
+      })
+      .catch(err => res.json(err));
+  }
 }

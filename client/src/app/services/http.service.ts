@@ -97,4 +97,9 @@ export class HttpService {
     this.loading.next(true);
     return this._http.delete(`/api/game/id/${id}`, this.setAuthorization())
   }
+
+  editGameInfo(id) {
+    this.loading.next(true);
+    return this._http.get(`/api/game/edit/${id}`, this.setAuthorization());
+  }
 }
