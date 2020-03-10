@@ -90,11 +90,12 @@ module.exports = {
     // Games created by Player
     // User Info minus the password
     // Highscores Player has populated
-    let promiseArr = [db.Game.find({ creatorId: req.user.id }), db.User.findById(req.user.id).populate({ path: 'highScoreArray' }).exec()];
+    let promiseArr = [db.Game.find({ creatorId: req.user.id }), db.User.findById(req.user.id).populate({ path: 'highScoreArray', populate: 'game_id' }).select('-password').exec()];
     Promise.all(promiseArr)
       .then(results => {
         console.log(results);
-        res.json(results)
+        const profile = { games: results[0], userData: results[1] }
+        res.json(profile)
       })
       .catch(err => {
         console.log(err)

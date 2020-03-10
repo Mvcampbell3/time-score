@@ -84,6 +84,7 @@ export class HttpService {
   }
 
   userProfile() {
+    this.loading.next(true)
     return this._http.get('/api/user/profile', this.setAuthorization())
   }
 }

@@ -1,2 +1,80 @@
-<p>profile works!</p>
-<app-loader *ngIf='loading'></app-loader>
+<div class="profile-bg">
+  <app-loader *ngIf='loading'></app-loader>
+
+  <div class="profile" *ngIf='loadedProfile'>
+
+    <div class="modal" #warningModal>
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div class="card">
+          <div class="card-header">
+            <p class="card-header-title">Warning!</p>
+          </div>
+          <div class="card-content has-text-centered">
+            <div class="content">
+              <p>{{warningMessage}}</p>
+              <p>{{warningItem}}</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class='card-footer-item has-text-link pointer' (click)='closeModal()'>Cancel</div>
+          </div>
+        </div>
+      </div>
+      <button class="modal-close is-large" aria-label="close" (click)='closeModal()'></button>
+    </div>
+
+    <div class="hero is-white">
+      <div class="hero-body has-text-centered">
+        <h1 class="title">Welcome {{userProfile.userData.username}}!</h1>
+        <p class="subtitle">This is your profile page</p>
+      </div>
+    </div>
+    <div class="container smallPad">
+      <div class="columns">
+        <div class="column">
+          <div class="game has-text-centered">
+            <div class="game-item has-text-centered">Game List</div>
+          </div>
+          <div class="game" *ngFor='let game of games'>
+            <div class="game-item name">{{game.name}}</div>
+            <div class="game-item button-holder">
+              <button class="button is-small is-success" (click)='initModal("game", "edit", game._id, game.name)'>
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="button is-small is-danger" (click)='initModal("game", "delete", game._id, game.name)'>
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="game has-text-centered">
+            <div class="game-item">High Score List</div>
+          </div>
+          <div class="highscore">
+            <div class="highscore-item score">Game Name</div>
+            <div class="highscore-item score">Percent</div>
+            <div class="highscore-item score">Time Left</div>
+            <div class="highscore-item score">Delete</div>
+          </div>
+          <div class="highscore" *ngFor='let highScore of highScores'>
+            <div class="highscore-item score">{{highScore.game_id.name}}</div>
+            <div class="highscore-item score">{{highScore.score}}</div>
+            <div class="highscore-item score">{{highScore.time_left}}</div>
+            <div class="highscore-item score">
+              <button class="button is-small is-danger"
+                (click)='initModal("highscore", "delete", highScore._id, highScore.game_id.name)'>
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>

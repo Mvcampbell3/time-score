@@ -1,0 +1,25 @@
+.profile-bg {
+  min-height: calc(100vh - 52px);
+  background-color: #222;
+}
+
+.game {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0.25em 0;
+}
+
+.highscore {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 34.75px;
+  justify-items: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0.25em 0;
+}
