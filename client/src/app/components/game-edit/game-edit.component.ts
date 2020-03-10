@@ -13,7 +13,6 @@ export class GameEditComponent implements OnInit, OnDestroy {
   @ViewChild('answerModal', { static: false }) answerModal: ElementRef;
 
   game: Game = null;
-  originalGame: Game = null;
   loading: boolean = false;
   loadingSub: Subscription = this.http.loading.subscribe(
     (data: boolean) => {
@@ -46,12 +45,11 @@ export class GameEditComponent implements OnInit, OnDestroy {
     this.loadingSub.unsubscribe();
   }
 
-  getGameInfo(id) {
+  getGameInfo(id: string) {
     this.http.editGameInfo(id).subscribe(
       (data: Game) => {
         console.log(data)
-        this.originalGame = { ...data };
-        this.game = data;
+        this.game = { ...data };
         this.http.loading.next(false)
       },
       (err: any) => {
@@ -62,7 +60,20 @@ export class GameEditComponent implements OnInit, OnDestroy {
 
   testEdit() {
     console.log(this.game)
-    console.log(this.originalGame)
+    let originalGame: Game;
+    this.http.getOneGame(this.game._id).subscribe(
+      (data: Game) => {
+        originalGame = data;
+        console.log(this.game);
+        console.log(originalGame);
+        this.http.loading.next(false);
+        this.compareGames(this.game, originalGame)
+      },
+      (err: any) => {
+        console.log(err);
+        this.http.loading.next(false)
+      }
+    )
   }
 
   closeEditAnswersModal() {
@@ -70,8 +81,21 @@ export class GameEditComponent implements OnInit, OnDestroy {
     this.game.answers[this.answerIndex].accepted_values = this.game.answers[this.answerIndex].accepted_values.filter(accepted => accepted.trim() !== "");
   }
 
-  displayAnswerModal(index) {
+  displayAnswerModal(index: number) {
     this.answerIndex = index;
     this.answerModal.nativeElement.classList.add('is-active')
+  }
+
+  compareGames(newGame, originalGame) {
+    let updateObj = {};
+    let keyArr = Object.keys(newGame);
+    keyArr.forEach(keyItem => {
+      console.log(newGame[keyItem]);
+      console.log(originalGame[keyItem]);
+      if (newGame[keyItem] !== originalGame[keyItem]) {
+        updateObj[keyItem] = newGame[keyItem];
+      }
+    })
+    console.log(updateObj)
   }
 }
