@@ -92,4 +92,9 @@ export class HttpService {
     this.loading.next(true);
     return this._http.delete(`/api/highscore/delete/${id}`, this.setAuthorization())
   }
+
+  deleteGame(id) {
+    this.loading.next(true);
+    return this._http.delete(`/api/game/id/${id}`, this.setAuthorization())
+  }
 }

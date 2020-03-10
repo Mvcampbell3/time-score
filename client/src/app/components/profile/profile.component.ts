@@ -114,16 +114,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     console.log(`would execute ${this.op} on item with id of ${this.itemId}`)
     if (this.itemType === 'highscore' && this.op === 'delete') {
       this.deleteHighscore(this.itemId);
+    } else if (this.itemType === 'game' && this.op === 'delete') {
+      this.deleteGame(this.itemId);
     }
   }
 
   deleteHighscore(id) {
     this.http.deleteHighscore(id).subscribe(
       (data: any) => {
-        this.http.loading.next(false);
         console.log(data);
-        this.getUserProfile()
-        this.closeModal()
+        this.successfulEvent()
       },
       (err: any) => {
         console.log(err)
@@ -132,10 +132,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   deleteGame(id) {
-
+    this.http.deleteGame(id).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.successfulEvent()
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
   }
 
   editGame(id) {
 
+  }
+
+  successfulEvent() {
+    this.http.loading.next(false);
+    this.closeModal();
+    this.getUserProfile()
   }
 }

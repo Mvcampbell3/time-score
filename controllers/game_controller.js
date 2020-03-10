@@ -37,15 +37,21 @@ module.exports = {
   deleteOneGame: (req, res) => {
     db.Game.findById(req.params.id)
       .then(game => {
-        game.remove()
-          .then(results => {
-            console.log(results);
-            res.json(results)
-          })
-          .catch(err => {
-            console.log(err);
-            res.json(err)
-          })
+        console.log(typeof game.creatorId.toString(), typeof req.user.id)
+        if (req.user.id === game.creatorId.toString()) {
+          game.remove()
+            .then(results => {
+              console.log(results);
+              res.json(results)
+            })
+            .catch(err => {
+              console.log(err);
+              res.json(err)
+            })
+        } else {
+          res.status(401).json({ msg: 'Unauthorized' })
+        }
+
       })
       .catch(err => {
         console.log(err);

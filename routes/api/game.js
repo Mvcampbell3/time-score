@@ -9,6 +9,6 @@ router.route('/')
 
 router.route('/id/:id')
   .get(game_controller.getOneGame)
-  .delete(game_controller.deleteOneGame)
+  .delete(checkAuth, game_controller.deleteOneGame)
 
 module.exports = router;
