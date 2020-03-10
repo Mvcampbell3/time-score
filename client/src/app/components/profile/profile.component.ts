@@ -116,6 +116,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.deleteHighscore(this.itemId);
     } else if (this.itemType === 'game' && this.op === 'delete') {
       this.deleteGame(this.itemId);
+    } else if (this.itemType === 'game' && this.op === 'edit') {
+      this.editGame(this.itemId)
     }
   }
 
@@ -144,7 +146,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   editGame(id) {
-
+    this.router.navigate([`/edit/${id}`])
   }
 
   successfulEvent() {
