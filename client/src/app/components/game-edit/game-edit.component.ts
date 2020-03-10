@@ -19,6 +19,18 @@ export class GameEditComponent implements OnInit {
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
     console.log(id);
+    this.getGameInfo(id)
+  }
+
+  getGameInfo(id) {
+    this.http.editGameInfo(id).subscribe(
+      (data: any) => {
+        console.log(data)
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
   }
 
 }
