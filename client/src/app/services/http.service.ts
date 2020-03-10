@@ -87,4 +87,9 @@ export class HttpService {
     this.loading.next(true)
     return this._http.get('/api/user/profile', this.setAuthorization())
   }
+
+  deleteHighscore(id) {
+    this.loading.next(true);
+    return this._http.delete(`/api/highscore/delete/${id}`, this.setAuthorization())
+  }
 }
