@@ -1,0 +1,23 @@
+.answer {
+  display: grid;
+  grid-template-columns: auto 1fr 150px;
+  align-items: center;
+
+  .info {
+    display: flex;
+    padding: 8px;
+    border-radius: 5px;
+    width: 100%;
+    justify-content: flex-end;
+
+    .accepted-items {
+      padding: 0 10px;
+    }
+  }
+}
+
+.button-holder {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

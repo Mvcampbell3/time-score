@@ -1,1 +1,106 @@
-<p>edit page works</p>
+<app-loader *ngIf='loading'></app-loader>
+<div class="game-container" *ngIf='game'>
+
+  <div class="modal" #answerModal>
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="card">
+        <div class="card-header">
+          <p class="card-header-title"></p>
+        </div>
+        <div class="card-content">
+          <div class="field">
+            <div class="control">
+              <label class='label'>Display Answer</label>
+              <input type="text" class="input" [(ngModel)]='game.answers[answerIndex].display_value'>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class='label'>Accepted Answer 1</label>
+              <input type="text" class="input" [(ngModel)]='game.answers[answerIndex].accepted_values[0]'>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class='label'>Accepted Answer 2</label>
+              <input type="text" class="input" [(ngModel)]='game.answers[answerIndex].accepted_values[1]'>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <label class='label'>Accepted Answer 3</label>
+              <input type="text" class="input" [(ngModel)]='game.answers[answerIndex].accepted_values[2]'>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class='card-footer-item has-text-link pointer' (click)='closeEditAnswersModal()'>Close</div>
+        </div>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close" (click)='closeEditAnswersModal()'></button>
+  </div>
+
+
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half is-offset-one-quarter">
+        <div class="field">
+          <div class="control">
+            <label class="label">Name</label>
+            <input type="text" class="input" [(ngModel)]='game.name'>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="label">Description</label>
+            <input type="text" class="input" [(ngModel)]='game.description'>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="label">Instructions</label>
+            <textarea class="textarea" [(ngModel)]='game.instructions'></textarea>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="label">Placeholder</label>
+            <input type='text' class="input" [(ngModel)]='game.inputPlaceholder'>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <label class="label">Test Btn</label>
+            <button class="button is-primary" (click)='testEdit()'>Test</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="answer-container">
+      <div class="answer" *ngFor='let answer of game.answers; let i = index'>
+        <p>{{answer.display_value}}</p>
+        <div class="info">
+          <p class='accepted-items' *ngFor='let accepted of answer.accepted_values'>{{accepted}}</p>
+        </div>
+        <div class='button-holder'>
+          <button class="button is-small is-link">
+            <i class="fas fa-angle-up"></i>
+          </button>
+          <button class="button is-small is-link">
+            <i class="fas fa-angle-down"></i>
+          </button>
+          <button class="button is-small is-success" (click)='displayAnswerModal(i)'>
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="button is-small is-danger">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
