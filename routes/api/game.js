@@ -13,5 +13,6 @@ router.route('/id/:id')
 
 router.route('/edit/:id')
   .get(checkAuth, game_controller.getEditInfo)
+  .put(checkAuth, game_controller.updateGame)
 
 module.exports = router;

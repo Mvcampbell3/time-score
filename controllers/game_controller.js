@@ -69,5 +69,11 @@ module.exports = {
         }
       })
       .catch(err => res.json(err));
+  },
+
+  updateGame: (req, res) => {
+    db.Game.findByIdAndUpdate(req.params.id, req.body.updateObj)
+      .then(result => res.json(result))
+      .catch(err => res.json(err))
   }
 }

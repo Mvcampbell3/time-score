@@ -97,5 +97,15 @@ export class GameEditComponent implements OnInit, OnDestroy {
       }
     })
     console.log(updateObj)
+    this.http.updateGame(this.game._id, updateObj).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.http.loading.next(false);
+      },
+      (err: any) => {
+        console.log(err);
+        this.http.loading.next(false)
+      }
+    )
   }
 }

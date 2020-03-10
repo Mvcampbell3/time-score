@@ -102,4 +102,9 @@ export class HttpService {
     this.loading.next(true);
     return this._http.get(`/api/game/edit/${id}`, this.setAuthorization());
   }
+
+  updateGame(id, updateObj) {
+    this.loading.next(true);
+    return this._http.put(`/api/game/edit/${id}`, { updateObj }, this.setAuthorization())
+  }
 }
