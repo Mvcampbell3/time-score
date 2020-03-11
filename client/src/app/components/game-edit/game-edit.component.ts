@@ -3,6 +3,7 @@ import { HttpService } from 'src/app/services/http.service';
 import { Game } from '../../models/game';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Answer } from 'src/app/models/answer';
 
 @Component({
   selector: 'app-game-edit',
@@ -86,7 +87,7 @@ export class GameEditComponent implements OnInit, OnDestroy {
     this.answerModal.nativeElement.classList.add('is-active')
   }
 
-  compareGames(newGame, originalGame) {
+  compareGames(newGame: Game, originalGame: Game) {
     let updateObj = {};
     let keyArr = Object.keys(newGame);
     keyArr.forEach(keyItem => {
@@ -101,11 +102,55 @@ export class GameEditComponent implements OnInit, OnDestroy {
       (data: any) => {
         console.log(data);
         this.http.loading.next(false);
+        this.router.navigate(['/profile']);
       },
       (err: any) => {
         console.log(err);
         this.http.loading.next(false)
       }
     )
+  }
+
+  moveAnswer(up: boolean, index: number) {
+    if (up && index > 0) {
+      let placeholder = this.game.answers[index];
+      this.game.answers[index] = this.game.answers[index - 1];
+      this.game.answers[index - 1] = placeholder;
+    } else if (!up && index < this.game.answers.length - 1) {
+      let placeholder = this.game.answers[index];
+      this.game.answers[index] = this.game.answers[index + 1];
+      this.game.answers[index + 1] = placeholder;
+    }
+  }
+
+  addAnswer() {
+    console.log(this.updateDisplay, this.updateAccepted1, this.updateAccepted2, this.updateAccepted3)
+    if (this.updateDisplay.trim() !== "") {
+      if (this.updateAccepted1.trim() !== "" || this.updateAccepted2.trim() !== "" || this.updateAccepted3.trim() !== "") {
+        const newAnswer: Answer = new Answer("", []);
+        newAnswer.display_value = this.updateDisplay;
+        const acceptables = [this.updateAccepted1, this.updateAccepted2, this.updateAccepted3];
+        const filled = acceptables.filter(answer => answer !== "");
+        filled.forEach(one => newAnswer.accepted_values.push(one));
+        console.log(newAnswer)
+        this.game.answers.push(newAnswer)
+        this.clearAnswer()
+      } else {
+        // this.missingAnswerInfo()
+      }
+    } else {
+      // this.missingAnswerInfo()
+    }
+  }
+
+  removeAnswer(index: number) {
+    this.game.answers.splice(index, 1);
+  }
+
+  clearAnswer() {
+    this.updateDisplay = "";
+    this.updateAccepted1 = "";
+    this.updateAccepted2 = "";
+    this.updateAccepted3 = "";
   }
 }

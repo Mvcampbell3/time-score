@@ -80,26 +80,58 @@
     </div>
 
     <div class="answer-container">
-      <div class="answer" *ngFor='let answer of game.answers; let i = index'>
-        <p>{{answer.display_value}}</p>
-        <div class="info">
-          <p class='accepted-items' *ngFor='let accepted of answer.accepted_values'>{{accepted}}</p>
+      <div class="left-side">
+        <div class="field">
+          <div class="control">
+            <input type="text" class="input" placeholder="New Display Answer..." [(ngModel)]='updateDisplay'>
+          </div>
         </div>
-        <div class='button-holder'>
-          <button class="button is-small is-link">
-            <i class="fas fa-angle-up"></i>
-          </button>
-          <button class="button is-small is-link">
-            <i class="fas fa-angle-down"></i>
-          </button>
-          <button class="button is-small is-success" (click)='displayAnswerModal(i)'>
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="button is-small is-danger">
-            <i class="fas fa-times"></i>
-          </button>
+        <div class="field">
+          <div class="control">
+            <input type="text" class="input" placeholder="New Accepted Answer..." [(ngModel)]='updateAccepted1'>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="text" class="input" placeholder="New Accepted Answer..." [(ngModel)]='updateAccepted2'>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <input type="text" class="input" placeholder="New Accepted Answer..." [(ngModel)]='updateAccepted3'>
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <button class="button is-success is-medium" (click)='addAnswer()'>
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
         </div>
       </div>
+      <div class="right-side">
+        <div class="answer" *ngFor='let answer of game.answers; let i = index'>
+          <p>{{answer.display_value}}</p>
+          <div class="info">
+            <p class='accepted-items' *ngFor='let accepted of answer.accepted_values'>{{accepted}}</p>
+          </div>
+          <div class='button-holder'>
+            <button class="button is-small is-link" (click)='moveAnswer(true, i)'>
+              <i class="fas fa-angle-up"></i>
+            </button>
+            <button class="button is-small is-link" (click)='moveAnswer(false, i)'>
+              <i class="fas fa-angle-down"></i>
+            </button>
+            <button class="button is-small is-success" (click)='displayAnswerModal(i)'>
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="button is-small is-danger" (click)='removeAnswer(i)'>
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>

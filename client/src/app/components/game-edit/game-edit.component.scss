@@ -21,3 +21,15 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.answer-container {
+  display: grid;
+  grid-template-columns: 300px auto;
+  column-gap: 20px;
+  max-width: 1000px;
+  margin: 1em auto;
+}
+
+.left-side {
+  padding: 8px 0;
+}
